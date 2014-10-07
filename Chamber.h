@@ -3,7 +3,6 @@
 #include <Cell.h>
 #include <vector>
 #include <memory>
-#include <string>
 
 class Chamber {
 public:
@@ -20,9 +19,19 @@ public:
 		std::cout << std::endl;
 	}
 
-	void addCell(std::shared_ptr<Cell> cell){
-		m_cells.push_back(cell);
-		m_dummyRow2.push_back(cell);
+	void addCell(){
+		m_cells.push_back(    std::shared_ptr<Cell>(new Cell(m_cells.size(), 1)));
+		m_dummyRow2.push_back(std::shared_ptr<Cell>(new Cell(m_cells.size(), 2)));
+	}
+
+	void cleanUp(){
+		for (auto& cellPtr : m_cells){
+			cellPtr->setHitInfo(0,0);
+		}
+
+		for (auto& cellPtr : m_dummyRow2){
+			cellPtr->setHitInfo(0,0);
+		}
 	}
 
 private:

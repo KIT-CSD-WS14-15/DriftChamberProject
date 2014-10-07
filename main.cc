@@ -1,4 +1,5 @@
 #include <GeometryCreatorModule.h>
+#include <ParticleGunModule.h>
 #include <Module.h>
 
 #include <list>
@@ -15,6 +16,9 @@ int main() {
 	//The following code decides, which modules actually will be executed.
 	GeometryCreatorModule geometryCreatorModule;
 	moduleList.push_back(&geometryCreatorModule);
+
+	ParticleGunModule particleGunModule;
+	moduleList.push_back(&particleGunModule);
 
 	//How many events do we want?
 	unsigned nEvents = 10;

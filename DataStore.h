@@ -2,18 +2,19 @@
 
 #include <map>
 #include <string>
+#include <memory>
 
 enum class Durability {event, persistent};
 
 template <class Storable>
 class DataStore{
 public:
-  DataStore& Instance(){
-	  static DataStore instance;
+  static DataStore<Storable>& Instance(){
+	  static DataStore<Storable> instance;
 	  return instance;
   }
 
-  Storable& getStorable(std::string name, Durability durability = Durability::event){
+  std::shared_ptr<Storable> getStorable(std::string name, Durability durability = Durability::event){
 	  if (durability == Durability::event){
 		  return m_eventMap[name];
 	  }
@@ -21,23 +22,23 @@ public:
 	  return m_persistentMap[name];
   }
 
-  void store(std::string name, Storable* Astorable, Durability durability = Durability::event){
+  void store(std::string name, std::shared_ptr<Storable> AstorablePtr, Durability durability = Durability::event){
     if (durability == Durability::event){
-    	m_eventMap[name] = Astorable;
+    	m_eventMap[name] = AstorablePtr;
     } else {
-    	m_persistentMap[name] = Astorable;
+    	m_persistentMap[name] = AstorablePtr;
     }
   }
 
-  DataStore& operator=(const DataStore&) = delete;
+  DataStore<Storable>& operator=(const DataStore<Storable>&) = delete;
 
-  DataStore (const DataStore&) = delete;
+  DataStore<Storable> (const DataStore<Storable>&) = delete;
 
 private:
+  explicit DataStore<Storable>()
+  {};
 
-  explicit DataStore() {};
+  std::map<std::string, std::shared_ptr<Storable> > m_persistentMap;
 
-  std::map<std::string, Storable> m_persistentMap;
-
-  std::map<std::string, Storable> m_eventMap;
+  std::map<std::string, std::shared_ptr<Storable> > m_eventMap;
 };

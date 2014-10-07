@@ -1,14 +1,16 @@
 #pragma once
-#include <limits>
 #include <string>
 
 class Cell {
 public:
-	Cell(unsigned eDepositionCount = std::numeric_limits<unsigned>::max(),
-		 unsigned driftTimeCount   = 0) :
-			 m_eDepositionCount (eDepositionCount),
-			 m_driftTimeCount   (driftTimeCount)
-	{
+	Cell(unsigned xPosition, unsigned yPosition) :
+		     m_xPosition (xPosition), m_yPosition (yPosition),
+			 m_eDepositionCount (0), m_driftTimeCount   (0)
+	{}
+
+	void setHitInfo (unsigned eDepositionCount, unsigned driftTimeCount = 0){
+		m_eDepositionCount = eDepositionCount;
+		m_driftTimeCount   = driftTimeCount;
 	}
 
     std::string visualize(){
@@ -20,6 +22,9 @@ public:
 
 
 private:
+  unsigned m_xPosition;
+  unsigned m_yPosition;
+
   unsigned m_eDepositionCount;
   unsigned m_driftTimeCount;
 };
