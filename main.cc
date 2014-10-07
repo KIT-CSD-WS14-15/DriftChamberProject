@@ -1,22 +1,25 @@
-#include <iostream>
+#include <GeometryCreatorModule.h>
 #include <Module.h>
-#include <list>
 
-using namespace std;
+#include <list>
+#include <iostream>
 
 int main() {
-	cout << "This program makes a toy simulation of a drift chamber and "
-		 <<	"then tries some simple reconstruction algorithms." << endl;
+	std::cout << "This program makes a toy simulation of a drift chamber and "
+		 <<	"then tries some simple reconstruction algorithms." << std::endl;
 
 	//Define list of modules to be taken.
-	list<Module*> moduleList;
+	std::list<Module*> moduleList;
 
-	Module myDummyModule;
-	moduleList.push_back(&myDummyModule);
+	//-----------------------------------------------------------------------------------
+	//The following code decides, which modules actually will be executed.
+	GeometryCreatorModule geometryCreatorModule;
+	moduleList.push_back(&geometryCreatorModule);
 
 	//How many events do we want?
 	unsigned nEvents = 10;
 
+	//-----------------------------------------------------------------------------------
     //Loop over the modules, that are foreseen for this run.
 	for (auto module : moduleList){
 		module->begin();
