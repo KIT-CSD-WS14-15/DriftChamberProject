@@ -1,3 +1,6 @@
 #-*- coding: utf-8 -*-
 
-Program ("DriftChamberSimulationReconstruction", "main.cc")
+env = DefaultEnvironment()
+env['CXX'] = '/local/scratch/heck/basf2/tools/gcc/bin/g++'
+
+Program ("DriftChamberSimulationReconstruction", Glob('*.cc') , CPPPATH=['.'], CCFLAGS = ['-std=c++11'])
