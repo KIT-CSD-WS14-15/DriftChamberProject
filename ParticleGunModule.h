@@ -1,8 +1,5 @@
 #pragma once
-#include <DataStore.h>
-#include <Chamber.h>
-#include <memory>
-#include <iostream>
+#include <Module.h>
 
 /** Shoot a particle through the Chamber.
  *
@@ -32,15 +29,6 @@
  */
 class ParticleGunModule : public Module {
 public:
-	void begin() override {
-      std::shared_ptr<Chamber> myChamber = DataStore<Chamber>::Instance().getStorable("Chamber");
-
-      std::cout << "Another times visualizing the Chamber" << std::endl;
-      myChamber->visualize();
-	}
-
-	void event() override {
-		//do the Tracking
-	}
+	void event() override;
 
 };

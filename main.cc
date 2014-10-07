@@ -1,24 +1,29 @@
 #include <GeometryCreatorModule.h>
 #include <ParticleGunModule.h>
+#include <TrackFinderModule.h>
 #include <Module.h>
 
 #include <list>
 #include <iostream>
+#include <memory>
 
 int main() {
 	std::cout << "This program makes a toy simulation of a drift chamber and "
 		 <<	"then tries some simple reconstruction algorithms." << std::endl;
 
 	//Define list of modules to be taken.
-	std::list<Module*> moduleList;
+	std::list<std::shared_ptr<Module> > moduleList;
 
 	//-----------------------------------------------------------------------------------
 	//The following code decides, which modules actually will be executed.
-	GeometryCreatorModule geometryCreatorModule;
-	moduleList.push_back(&geometryCreatorModule);
+	std::shared_ptr<Module> geometryCreatorModule (new GeometryCreatorModule());
+	moduleList.push_back(geometryCreatorModule);
 
-	ParticleGunModule particleGunModule;
-	moduleList.push_back(&particleGunModule);
+	std::shared_ptr<Module> particleGunModule (new ParticleGunModule());
+	moduleList.push_back(particleGunModule);
+
+	std::shared_ptr<Module> trackFinderModule(new TrackFinderModule());
+	moduleList.push_back(trackFinderModule);
 
 	//How many events do we want?
 	unsigned nEvents = 10;

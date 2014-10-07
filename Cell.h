@@ -12,11 +12,19 @@ public:
 		m_eDepositionCount = eDepositionCount;
 	}
 
+	void addEDeposition(unsigned eDepositionCount){
+		m_eDepositionCount += eDepositionCount;
+	}
+
     std::string visualize(){
     	//see
     	//https://gist.github.com/ian128K/39a490e5aa8d3bb77a8b
     	//for color coding.
-    	return "\x1B[97;40;1mO\x1B[0m";
+    	if (m_eDepositionCount ==0 ){
+    	  return "\x1B[97;40;1mO\x1B[0m";
+    	} else {
+    	  return "\x1B[97;40;1mX\x1B[0m";
+    	}
     }
 
 
