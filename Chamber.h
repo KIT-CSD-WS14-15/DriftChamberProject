@@ -26,11 +26,11 @@ public:
 
 	void cleanUp(){
 		for (auto& cellPtr : m_cells){
-			cellPtr->setHitInfo(0,0);
+			cellPtr->setEDeposition(0);
 		}
 
 		for (auto& cellPtr : m_dummyRow2){
-			cellPtr->setHitInfo(0,0);
+			cellPtr->setEDeposition(0);
 		}
 	}
 

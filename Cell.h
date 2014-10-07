@@ -5,12 +5,11 @@ class Cell {
 public:
 	Cell(unsigned xPosition, unsigned yPosition) :
 		     m_xPosition (xPosition), m_yPosition (yPosition),
-			 m_eDepositionCount (0), m_driftTimeCount   (0)
+			 m_eDepositionCount (0)
 	{}
 
-	void setHitInfo (unsigned eDepositionCount, unsigned driftTimeCount = 0){
+	void setEDeposition (unsigned eDepositionCount){
 		m_eDepositionCount = eDepositionCount;
-		m_driftTimeCount   = driftTimeCount;
 	}
 
     std::string visualize(){
@@ -26,5 +25,4 @@ private:
   unsigned m_yPosition;
 
   unsigned m_eDepositionCount;
-  unsigned m_driftTimeCount;
 };
