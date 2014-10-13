@@ -1,8 +1,11 @@
-#include <modules/GeometryCreatorModule.h>
-#include <core/DataStore.h>
-#include <iostream>
 #include <Chamber.h>
 #include <Cell.h>
+
+#include <modules/GeometryCreatorModule.h>
+
+#include <core/DataStore.h>
+
+#include <iostream>
 #include <memory>
 
 using namespace std;
@@ -17,7 +20,6 @@ void GeometryCreatorModule::begin(){
 	  chamber->addCell();
   }
 
-
   //print Setup of Cells
   chamber->visualize();
 
@@ -29,4 +31,3 @@ void GeometryCreatorModule::begin(){
 void GeometryCreatorModule::event(){
   DataStore<Chamber>::Instance().getStorable("Chamber")->cleanUp();
 }
-
