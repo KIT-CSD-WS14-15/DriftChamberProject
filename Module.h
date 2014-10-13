@@ -1,13 +1,14 @@
 #pragma once
 
-#include <iostream>
-
 /** This is a base class for modules, that will then do the actual work.
  *
- *  The default for each function is, that nothing is done.
+ *  The idea is, that first begin is called for each module, then event is called for
+ *  each module several times, and then end is called for each module.
+ *  Always in the same order.
  */
 class Module{
 public:
+	/** Make destructor virtual as this is a base class for other classes. */
 	virtual ~Module(){}
 
 	/** Function called at the beginning of the modules loop. */

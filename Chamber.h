@@ -1,8 +1,10 @@
 #pragma once
 
 #include <Cell.h>
+
 #include <vector>
 #include <memory>
+#include <iostream>
 
 /** The geometric representation of the drift chamber.
  */
@@ -15,6 +17,16 @@ public:
 	 */
 	void visualize() const {
 		std::cout << "Print current Chamber" << std::endl;
+		for (auto& cellPtr : m_dummyRow4){
+			std::cout << cellPtr->visualize();
+		}
+		std::cout << std::endl;
+
+		for (auto& cellPtr : m_dummyRow3){
+			std::cout << cellPtr->visualize();
+		}
+		std::cout << std::endl;
+
 		for (auto& cellPtr : m_dummyRow2){
 			std::cout << cellPtr->visualize();
 		}
@@ -34,6 +46,8 @@ public:
 	void addCell(){
 		m_cells.push_back(    std::shared_ptr<Cell>(new Cell(m_cells.size(), 1)));
 		m_dummyRow2.push_back(std::shared_ptr<Cell>(new Cell(m_cells.size(), 2)));
+		m_dummyRow3.push_back(std::shared_ptr<Cell>(new Cell(m_cells.size(), 3)));
+		m_dummyRow4.push_back(std::shared_ptr<Cell>(new Cell(m_cells.size(), 4)));
 	}
 
 	/** "Empties" all cells by resetting their energy deposition.
@@ -48,14 +62,28 @@ public:
 		for (auto& cellPtr : m_dummyRow2){
 			cellPtr->setEDeposition(0);
 		}
+
+		for (auto& cellPtr : m_dummyRow3){
+			cellPtr->setEDeposition(0);
+		}
+
+		for (auto& cellPtr : m_dummyRow4){
+			cellPtr->setEDeposition(0);
+		}
 	}
 
 	std::shared_ptr<Cell> getCellAt(unsigned xPosition, unsigned yPosition){
       if (xPosition < m_cells.size()){
         if (yPosition == 0) {
         	return m_cells[xPosition];
-        } else {
+        } else if (yPosition == 1) {
         	return m_dummyRow2[xPosition];
+        } else if (yPosition == 2){
+        	return m_dummyRow3[xPosition];
+        } else if (yPosition == 3){
+        	return m_dummyRow4[xPosition];
+        } else {
+        	return nullptr;
         }
       } else {
     	  return nullptr;
@@ -67,11 +95,13 @@ public:
 	}
 
 	unsigned getMaxY(){
-		return 2;
+		return 4;
 	}
 
 private:
 	std::vector< std::shared_ptr<Cell> > m_cells;
 	std::vector< std::shared_ptr<Cell> > m_dummyRow2;
+	std::vector< std::shared_ptr<Cell> > m_dummyRow3;
+	std::vector< std::shared_ptr<Cell> > m_dummyRow4;
 
 };
