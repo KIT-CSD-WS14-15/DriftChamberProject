@@ -1,7 +1,7 @@
 #include <modules/ParticleGunModule.h>
 #include <core/DataStore.h>
-#include <Chamber.h>
-#include <Particle.h>
+#include <geometry/Chamber.h>
+#include <reconstruction/Particle.h>
 
 #include <memory>
 #include <iostream>

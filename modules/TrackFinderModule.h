@@ -7,5 +7,5 @@
  */
 class TrackFinderModule  :public Module {
 public:
-	void event() override{}
+	void event() override;
 };

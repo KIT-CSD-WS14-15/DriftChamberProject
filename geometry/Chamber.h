@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Cell.h>
+#include <geometry/Cell.h>
 
 #include <vector>
 #include <memory>
