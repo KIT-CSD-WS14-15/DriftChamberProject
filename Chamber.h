@@ -56,19 +56,19 @@ public:
 	 */
 	void cleanUp(){
 		for (auto& cellPtr : m_cells){
-			cellPtr->setEDeposition(0);
+			cellPtr->resetEDeposition();
 		}
 
 		for (auto& cellPtr : m_dummyRow2){
-			cellPtr->setEDeposition(0);
+			cellPtr->resetEDeposition();
 		}
 
 		for (auto& cellPtr : m_dummyRow3){
-			cellPtr->setEDeposition(0);
+			cellPtr->resetEDeposition();
 		}
 
 		for (auto& cellPtr : m_dummyRow4){
-			cellPtr->setEDeposition(0);
+			cellPtr->resetEDeposition();
 		}
 	}
 

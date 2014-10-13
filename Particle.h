@@ -4,7 +4,7 @@
 class Particle {
 public:
 
-	Particle (float pX, float pY) : m_x(0.), m_y(-0.5) {
+	Particle (float pX, float pY) : m_x(0.), m_y(0.) {
 		m_pX = pX/ sqrtf(pX * pX + pY * pY);
     	m_pY = pY/ sqrtf(pX * pX + pY * pY);
 	}

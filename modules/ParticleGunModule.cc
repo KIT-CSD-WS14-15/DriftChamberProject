@@ -24,8 +24,8 @@ void ParticleGunModule::event()
 
   while (particle.getXPosition() < myChamber->getMaxX() && particle.getYPosition() < myChamber->getMaxY()){
 	  //find nearest cell
-	  int xPosition = static_cast<unsigned>(particle.getXPosition()+0.5);
-	  int yPosition = static_cast<unsigned>(particle.getYPosition()+0.5);
+	  int xPosition = static_cast<unsigned>(particle.getXPosition());
+	  int yPosition = static_cast<unsigned>(particle.getYPosition());
 
 	  shared_ptr<Cell> myCellPtr = myChamber->getCellAt(xPosition, yPosition);
 	  if (myCellPtr) {

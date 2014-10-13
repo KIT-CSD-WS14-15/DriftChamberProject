@@ -14,7 +14,7 @@ void GeometryCreatorModule::begin(){
   cout << "Build some geometry" << endl;
 
   std::shared_ptr<Chamber>  chamber (new Chamber());
-  unsigned chamberSize = 16;
+  unsigned chamberSize = 8;
 
   for (int ii = 0; ii < chamberSize; ii++){
 	  chamber->addCell();
