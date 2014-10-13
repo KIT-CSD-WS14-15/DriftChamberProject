@@ -1,8 +1,8 @@
-#include <GeometryCreatorModule.h>
-#include <ParticleGunModule.h>
-#include <TrackFinderModule.h>
+#include <modules/GeometryCreatorModule.h>
+#include <modules/ParticleGunModule.h>
+#include <modules/TrackFinderModule.h>
 
-#include <Module.h>
+#include <core/Module.h>
 
 #include <list>
 #include <iostream>

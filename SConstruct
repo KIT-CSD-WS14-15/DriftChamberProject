@@ -3,4 +3,4 @@
 env = DefaultEnvironment()
 env['CXX'] = '/local/scratch/heck/basf2/tools/gcc/bin/g++'
 
-Program ("DriftChamberSimulationReconstruction", Glob('*.cc') , CPPPATH=['.'], CCFLAGS = ['-std=c++11'])
+Program ("DriftChamberSimulationReconstruction", [Glob('*.cc'), Glob('./core/*.cc'), Glob('./modules/*.cc')] , CPPPATH=['.'], CCFLAGS = ['-std=c++11'])

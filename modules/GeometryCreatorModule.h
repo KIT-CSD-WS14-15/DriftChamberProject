@@ -1,5 +1,5 @@
 #pragma once
-#include <Module.h>
+#include <core/Module.h>
 #
 
 class GeometryCreatorModule : public Module {
