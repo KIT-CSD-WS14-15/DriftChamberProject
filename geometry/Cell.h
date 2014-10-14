@@ -9,6 +9,16 @@ public:
     m_eDepositionCount(0)
   {}
 
+  /** Returns the central position of the cell. */
+  float getXPosition() const {
+    return m_xPosition + 0.5;
+  }
+
+  /** Returns the central position of the cell. */
+  float getYPosition() const {
+    return m_yPosition + 0.5;
+  }
+
   /** Sets the energy deposition of a cell to 0. */
   void resetEDeposition() {
     m_eDepositionCount = 0;
@@ -22,16 +32,6 @@ public:
   /** Returns a counter of the energy deposition. */
   unsigned getEDeposition() {
     return m_eDepositionCount;
-  }
-
-  /** Returns the central position of the cell. */
-  float getXPosition() const {
-    return m_xPosition + 0.5;
-  }
-
-  /** Returns the central position of the cell. */
-  float getYPosition() const {
-    return m_yPosition + 0.5;
   }
 
   /** A string to be printed in context.
