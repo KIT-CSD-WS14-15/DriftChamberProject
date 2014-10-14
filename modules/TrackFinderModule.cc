@@ -12,6 +12,7 @@
 #define _USE_MATH_DEFINES
 #include <algorithm>
 
+
 using namespace std;
 
 void TrackFinderModule::event()
@@ -21,9 +22,23 @@ void TrackFinderModule::event()
 
   //Define the Hough plane:
   unsigned dimension = 30;
-  vector<vector<unsigned> > houghSpace(dimension, vector<unsigned>(dimension ,0));
+  vector<vector<unsigned> > houghSpace(dimension, vector<unsigned>(dimension , 0));
 
-  for (auto chamberIterator = chamber.first(); chamberIterator.current() != nullptr; ++chamberIterator) {
+  voteHough(chamber, houghSpace);
+
+  auto myTuple = findMaximum(houghSpace, chamber);
+  cout << "Best Track Candidate at: "  << endl
+       << "value: "  << get<0>(myTuple) << endl
+       << "X = "     << get<1>(myTuple) << endl
+       << "Angle = " << get<2>(myTuple) << endl;
+}
+
+
+void TrackFinderModule::voteHough(const Chamber& chamber,
+                                  vector<vector<unsigned> >& houghSpace)
+{
+  for (auto chamberIterator = chamber.first();
+       chamberIterator.current() != nullptr; ++chamberIterator) {
     auto cellPtr = chamberIterator.current();
     if (cellPtr->getEDeposition() == 0) {
       continue;
@@ -32,35 +47,44 @@ void TrackFinderModule::event()
     for (unsigned xShare = 0; xShare < houghSpace.size(); xShare++) {
 
       //Calculate current x-position (roughly):
-      float xPosition = static_cast<float>(xShare * chamber.getMaxX()) / static_cast<float>(houghSpace.size());
+      float xPosition = static_cast<float>(xShare * chamber.getMaxX())
+                        / static_cast<float>(houghSpace.size());
 
       //Calculate angle to cross current hit (vs. x-Axis):
-      float adjacent   = cellPtr->getXPosition() - xPosition;
-      float hypotenuse = sqrt((cellPtr->getYPosition() * cellPtr->getYPosition()) + (adjacent * adjacent));
+      float adjacent = cellPtr->getXPosition() - xPosition;
+      float hypotenuse = sqrt(
+                           (cellPtr->getYPosition() * cellPtr->getYPosition())
+                           + (adjacent * adjacent));
       float angle = acos(adjacent / hypotenuse);
 
       //Fill right bin:
-      houghSpace[xShare][static_cast<unsigned>((angle / M_PI)* houghSpace.size())]++;
+      houghSpace[xShare][static_cast<unsigned>((angle / M_PI) * houghSpace.size())]++;
     }
   }
+}
 
-  //Find maximum
+tuple<unsigned, float, float>
+TrackFinderModule::findMaximum(const vector<vector<unsigned> >& houghSpace,
+                               const Chamber& chamber)
+{
+//Find maximum
   unsigned maxXShare = 0;
-  unsigned maxAngle  = 0;
-  unsigned value     = 0;
+  unsigned maxAngle = 0;
+  unsigned value = 0;
   for (int ii = 0; ii < houghSpace.size(); ++ii) {
     for (int jj = 0; jj < houghSpace.size(); ++jj) {
       if (houghSpace[ii][jj] >= value) {
         value = houghSpace[ii][jj];
         maxXShare = ii;
-        maxAngle  = jj;
+        maxAngle = jj;
       }
     }
   }
 
-  cout << "Best Track Candidate at: " << endl
-       << "value: "     << value    << endl
-       << "X = " <<  static_cast<float>(maxXShare * chamber.getMaxX()) / static_cast<float>(houghSpace.size()) << endl
-       << "Angle = " << static_cast<float>(maxAngle * 180.) / static_cast<float>(houghSpace.size()) << endl;
+  float x     = static_cast<float>(maxXShare * chamber.getMaxX())
+                / static_cast<float>(houghSpace.size());
+  float angle = static_cast<float>(maxAngle * 180.)
+                / static_cast<float>(houghSpace.size());
 
+  return make_tuple(value, x, angle);
 }
