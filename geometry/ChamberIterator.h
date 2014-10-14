@@ -16,8 +16,8 @@ class ChamberIterator {
 public:
 
   /** This constructor comes always to live at the beginning of the cell.*/
-  ChamberIterator(Chamber const *  const chamber) :
-	  m_chamber(chamber), m_xPosition(0), m_yPosition(0)
+  ChamberIterator(Chamber const*   const chamber) :
+    m_chamber(chamber), m_xPosition(0), m_yPosition(0)
   {}
 
   /** Prefix operator. */
@@ -34,5 +34,5 @@ private:
   unsigned m_xPosition;
   unsigned m_yPosition;
 
-  Chamber const * const m_chamber;
+  Chamber const* const m_chamber;
 };

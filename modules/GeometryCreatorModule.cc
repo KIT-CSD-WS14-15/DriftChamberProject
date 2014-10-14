@@ -10,14 +10,15 @@
 
 using namespace std;
 
-void GeometryCreatorModule::begin(){
+void GeometryCreatorModule::begin()
+{
   cout << "Build some geometry" << endl;
 
-  std::shared_ptr<Chamber>  chamber (new Chamber());
+  std::shared_ptr<Chamber>  chamber(new Chamber());
   unsigned chamberSize = 8;
 
-  for (int ii = 0; ii < chamberSize; ii++){
-	  chamber->addCell();
+  for (int ii = 0; ii < chamberSize; ii++) {
+    chamber->addCell();
   }
 
   //print Setup of Cells
@@ -28,6 +29,7 @@ void GeometryCreatorModule::begin(){
 
 }
 
-void GeometryCreatorModule::event(){
+void GeometryCreatorModule::event()
+{
   DataStore<Chamber>::Instance().getStorable("Chamber")->cleanUp();
 }

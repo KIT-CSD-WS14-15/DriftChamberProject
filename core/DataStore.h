@@ -15,12 +15,12 @@
  *  http://de.wikipedia.org/wiki/Singleton_(Entwurfsmuster)
  */
 template <class Storable>
-class DataStore{
+class DataStore {
 public:
   /** This is the function to actually access the Singleton. */
-  static DataStore<Storable>& Instance(){
-	  static DataStore<Storable> instance;
-	  return instance;
+  static DataStore<Storable>& Instance() {
+    static DataStore<Storable> instance;
+    return instance;
   }
 
   /** Get a specific object from the Singleton.
@@ -29,7 +29,7 @@ public:
    *  all. You have to give a name as key for the map of objects.
    */
   std::shared_ptr<Storable> getStorable(std::string name) {
-	  return m_storableMap[name];
+    return m_storableMap[name];
   }
 
   /** Store an object of type Storable.
@@ -39,8 +39,8 @@ public:
    *  If you have several objects, you will typically have a reason for that,
    *  that can be reflected in the name.
    */
-  void store(std::string name, std::shared_ptr<Storable> AstorablePtr){
-	  m_storableMap[name] = AstorablePtr;
+  void store(std::string name, std::shared_ptr<Storable> AstorablePtr) {
+    m_storableMap[name] = AstorablePtr;
   }
 
   /** Getting rid of assignment operator, as this is a Singleton. */

@@ -3,5 +3,5 @@
 
 ChamberIterator Chamber::first() const
 {
-	return ChamberIterator(this);
+  return ChamberIterator(this);
 }

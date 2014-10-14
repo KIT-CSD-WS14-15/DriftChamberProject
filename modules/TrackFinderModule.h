@@ -6,7 +6,7 @@
  *
  *  http://de.wikipedia.org/wiki/Hough-Transformation
  */
-class TrackFinderModule  :public Module {
+class TrackFinderModule  : public Module {
 public:
-	void event() override;
+  void event() override;
 };

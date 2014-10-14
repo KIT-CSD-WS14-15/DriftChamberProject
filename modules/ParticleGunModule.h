@@ -29,6 +29,6 @@
  */
 class ParticleGunModule : public Module {
 public:
-	void event() override;
+  void event() override;
 
 };

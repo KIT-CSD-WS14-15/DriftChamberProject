@@ -4,11 +4,11 @@
 
 class GeometryCreatorModule : public Module {
 public:
-	GeometryCreatorModule(){}
+  GeometryCreatorModule() {}
 
-	/** Create the actual geometry. */
-	void begin();
+  /** Create the actual geometry. */
+  void begin();
 
-	/** Clean up any created chamber from stored information. */
-	void event();
+  /** Clean up any created chamber from stored information. */
+  void event();
 };
