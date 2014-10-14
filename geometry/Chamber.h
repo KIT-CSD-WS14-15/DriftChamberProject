@@ -2,6 +2,8 @@
 
 #include <geometry/Cell.h>
 
+class ChamberIterator;
+
 #include <vector>
 #include <memory>
 #include <iostream>
@@ -38,16 +40,19 @@ public:
 		std::cout << std::endl;
 	}
 
+	ChamberIterator first() const ;
+
 	/** This is a very preliminary way of adding cells.
 	 *
 	 *  The reason is, that one big task for the project is to write
 	 *  a new representation for the Chamber.
 	 */
 	void addCell(){
-		m_cells.push_back(    std::shared_ptr<Cell>(new Cell(m_cells.size(), 1)));
-		m_dummyRow2.push_back(std::shared_ptr<Cell>(new Cell(m_cells.size(), 2)));
-		m_dummyRow3.push_back(std::shared_ptr<Cell>(new Cell(m_cells.size(), 3)));
-		m_dummyRow4.push_back(std::shared_ptr<Cell>(new Cell(m_cells.size(), 4)));
+		unsigned xPosition = m_cells.size();
+		m_cells.push_back(    std::shared_ptr<Cell>(new Cell(xPosition, 0)));
+		m_dummyRow2.push_back(std::shared_ptr<Cell>(new Cell(xPosition, 1)));
+		m_dummyRow3.push_back(std::shared_ptr<Cell>(new Cell(xPosition, 2)));
+		m_dummyRow4.push_back(std::shared_ptr<Cell>(new Cell(xPosition, 3)));
 	}
 
 	/** "Empties" all cells by resetting their energy deposition.
@@ -72,7 +77,7 @@ public:
 		}
 	}
 
-	std::shared_ptr<Cell> getCellAt(unsigned xPosition, unsigned yPosition){
+	std::shared_ptr<Cell> getCellAt(unsigned xPosition, unsigned yPosition) const {
       if (xPosition < m_cells.size()){
         if (yPosition == 0) {
         	return m_cells[xPosition];
@@ -90,11 +95,11 @@ public:
       }
 	}
 
-	unsigned getMaxX(){
-		return (m_cells.size() + 1);
+	unsigned getMaxX() const {
+		return (m_cells.size());
 	}
 
-	unsigned getMaxY(){
+	unsigned getMaxY() const {
 		return 4;
 	}
 

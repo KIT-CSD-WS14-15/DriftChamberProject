@@ -19,6 +19,18 @@ public:
 		m_eDepositionCount += eDepositionCount;
 	}
 
+	unsigned getEDeposition(){
+		return m_eDepositionCount;
+	}
+
+	float getXPosition() const {
+		return m_xPosition + 0.5;
+	}
+
+	float getYPosition() const {
+		return m_yPosition + 0.5;
+	}
+
 	/** A string to be printed in context.
 	 *
 	 *  In this case a black background with an O for an empty cell

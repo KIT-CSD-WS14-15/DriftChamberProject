@@ -1,5 +1,6 @@
 #pragma once
 #include <core/Module.h>
+#include <utility>
 
 /** This module finds tracks in the Chamber by making use of a Hough-Algorithm.
  *

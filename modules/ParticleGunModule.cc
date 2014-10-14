@@ -15,7 +15,7 @@ void ParticleGunModule::event()
 
   //do the Tracking
   //Create a random Track, that will be stepped through the Chamber
-  float pX = rand()/static_cast<double>(RAND_MAX);
+  float pX = -rand()/static_cast<double>(RAND_MAX);
   float pY = rand()/static_cast<double>(RAND_MAX);
   Particle particle(pX, pY);
 
