@@ -19,14 +19,17 @@ public:
 		m_eDepositionCount += eDepositionCount;
 	}
 
+	/** Returns a counter of the energy deposition. */
 	unsigned getEDeposition(){
 		return m_eDepositionCount;
 	}
 
+	/** Returns the central position of the cell. */
 	float getXPosition() const {
 		return m_xPosition + 0.5;
 	}
 
+	/** Returns the central position of the cell. */
 	float getYPosition() const {
 		return m_yPosition + 0.5;
 	}
