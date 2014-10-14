@@ -26,6 +26,11 @@
  *      X
  *
  *  Currently only straight lines are implemented as paths of particles.
+ *
+ *  Note on testing:
+ *  This module isn't automatically tested, despite being non-trivial. However,
+ *  looking into the graphical output of the module gives a quite good understanding
+ *  if the thing works in quality we would like it to do.
  */
 class ParticleGunModule : public Module {
 public:

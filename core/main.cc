@@ -1,6 +1,7 @@
 #include <modules/GeometryCreatorModule.h>
 #include <modules/ParticleGunModule.h>
 #include <modules/TrackFinderModule.h>
+#include <modules/NewEventPrinterModule.h>
 
 #include <core/Module.h>
 
@@ -31,6 +32,7 @@ int main()
   moduleList.emplace_back(new GeometryCreatorModule());
   moduleList.emplace_back(new ParticleGunModule());
   moduleList.emplace_back(new TrackFinderModule());
+  moduleList.emplace_back(new NewEventPrinterModule());
 
   /** Number of times, the event function is called for each module.
    *

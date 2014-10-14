@@ -6,6 +6,7 @@
 #include <memory>
 #include <iostream>
 #include <random>
+#include <cmath>
 
 using namespace std;
 
@@ -15,12 +16,14 @@ void ParticleGunModule::event()
 
   //do the Tracking
   //Create a random Track, that will be stepped through the Chamber
-  float pX = -rand() / static_cast<double>(RAND_MAX);
-  float pY = rand() / static_cast<double>(RAND_MAX);
-  Particle particle(pX, pY);
+  float pX = (rand()/ static_cast<float>(RAND_MAX)-0.5) * 2.;
+  float pY =  rand()/ static_cast<float>(RAND_MAX);
 
-  cout << "pX = " << particle.getPX() << endl;
-  cout << "pY = " << particle.getPY() << endl;
+  //Lets limit the the x-position of the particle to the middle half.
+  float chamberSizeX = static_cast<float> (myChamber->getMaxX());
+  float x  = (((rand()/ static_cast<float>(RAND_MAX)) * chamberSizeX)+ (chamberSizeX/2.))/2.;
+
+  Particle particle(pX, pY, x);
 
   while (particle.getXPosition() < myChamber->getMaxX() && particle.getYPosition() < myChamber->getMaxY()) {
     //find nearest cell
@@ -36,5 +39,9 @@ void ParticleGunModule::event()
   }
 
   std::cout << "Visualizing the Chamber after a Track passed." << std::endl;
+  cout << "x    : " << x  << endl;
+  cout << "Angle: " << acos(particle.getPX()/sqrt(pow(particle.getPY(),2.) + pow(particle.getPX(),2.)))
+    * (180. / 3.14) << endl;
+
   myChamber->visualize();
 }

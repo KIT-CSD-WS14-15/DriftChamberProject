@@ -1,0 +1,15 @@
+#The executables:
+DriftChamberSimulationReconstruction
+myUnit*
+
+#various stuff, that is created by executing scons
+.sconsign.dblite
+*.o
+*.a
+
+#some other stuff that might be special to me
+.cproject
+.project
+SConstruct.py
+gtest*
+.settings

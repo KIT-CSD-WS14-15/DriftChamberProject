@@ -19,7 +19,9 @@ void TrackFinderModule::event()
   //get the geometry;
   const Chamber& chamber = *(DataStore<Chamber>::Instance().getStorable("Chamber").get());
 
-  vector<vector<unsigned> > houghSpace(15, vector<unsigned>(15));
+  //Define the Hough plane:
+  unsigned dimension = 30;
+  vector<vector<unsigned> > houghSpace(dimension, vector<unsigned>(dimension ,0));
 
   for (auto chamberIterator = chamber.first(); chamberIterator.current() != nullptr; ++chamberIterator) {
     auto cellPtr = chamberIterator.current();
@@ -27,22 +29,15 @@ void TrackFinderModule::event()
       continue;
     }
 
-    cout << "Start Hough procedure for a hit." << endl;
     for (unsigned xShare = 0; xShare < houghSpace.size(); xShare++) {
 
       //Calculate current x-position (roughly):
       float xPosition = static_cast<float>(xShare * chamber.getMaxX()) / static_cast<float>(houghSpace.size());
-      cout << "xPosition: " << xPosition << endl;
 
       //Calculate angle to cross current hit (vs. x-Axis):
       float adjacent   = cellPtr->getXPosition() - xPosition;
-      cout << "adjacent: " << adjacent << endl;
-      cout << "yPosi : " << cellPtr -> getYPosition() << endl;
       float hypotenuse = sqrt((cellPtr->getYPosition() * cellPtr->getYPosition()) + (adjacent * adjacent));
-      cout << "hypo: " << hypotenuse << endl;
       float angle = acos(adjacent / hypotenuse);
-      cout << "angle: " << angle * 180. / M_PI << endl;
-      cout << (angle / M_PI)* houghSpace.size() << endl;
 
       //Fill right bin:
       houghSpace[xShare][static_cast<unsigned>((angle / M_PI)* houghSpace.size())]++;
@@ -64,8 +59,6 @@ void TrackFinderModule::event()
   }
 
   cout << "Best Track Candidate at: " << endl
-       << "MaxXShare: " << maxXShare << endl
-       << "maxAngle: "  << maxAngle << endl
        << "value: "     << value    << endl
        << "X = " <<  static_cast<float>(maxXShare * chamber.getMaxX()) / static_cast<float>(houghSpace.size()) << endl
        << "Angle = " << static_cast<float>(maxAngle * 180.) / static_cast<float>(houghSpace.size()) << endl;

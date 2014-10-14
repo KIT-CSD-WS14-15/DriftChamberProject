@@ -13,11 +13,12 @@ using namespace std;
 void GeometryCreatorModule::begin()
 {
   cout << "Build some geometry" << endl;
+  unsigned nLayers = 10;
+  unsigned cellsPerLayer = 2 * nLayers;
 
-  std::shared_ptr<Chamber>  chamber(new Chamber());
-  unsigned chamberSize = 8;
+  std::shared_ptr<Chamber>  chamber(new Chamber(nLayers));
 
-  for (int ii = 0; ii < chamberSize; ii++) {
+  for (int ii = 0; ii < cellsPerLayer; ii++) {
     chamber->addCell();
   }
 

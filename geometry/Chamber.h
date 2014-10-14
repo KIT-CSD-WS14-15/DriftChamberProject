@@ -12,101 +12,42 @@ class ChamberIterator;
  */
 class Chamber {
 public:
+  /** Constructor for a Chamber with a number of lines given by parameter. */
+  Chamber(unsigned nLayers = 4);
+
+
   /** Prints some visualization on the command line.
    *
    *  This is one of the major functions of this programm,
    *  as the chamber "knows" as well about its energy depostion.
    */
-  void visualize() const {
-    std::cout << "Print current Chamber" << std::endl;
-    for (auto & cellPtr : m_dummyRow4) {
-      std::cout << cellPtr->visualize();
-    }
-    std::cout << std::endl;
+  void visualize() const;
 
-    for (auto & cellPtr : m_dummyRow3) {
-      std::cout << cellPtr->visualize();
-    }
-    std::cout << std::endl;
-
-    for (auto & cellPtr : m_dummyRow2) {
-      std::cout << cellPtr->visualize();
-    }
-    std::cout << std::endl;
-
-    for (auto & cellPtr : m_cells) {
-      std::cout << cellPtr->visualize();
-    }
-    std::cout << std::endl;
-  }
-
-  ChamberIterator first() const ;
+  ChamberIterator first() const;
 
   /** This is a very preliminary way of adding cells.
    *
    *  The reason is, that one big task for the project is to write
    *  a new representation for the Chamber.
    */
-  void addCell() {
-    unsigned xPosition = m_cells.size();
-    m_cells.push_back(std::shared_ptr<Cell>(new Cell(xPosition, 0)));
-    m_dummyRow2.push_back(std::shared_ptr<Cell>(new Cell(xPosition, 1)));
-    m_dummyRow3.push_back(std::shared_ptr<Cell>(new Cell(xPosition, 2)));
-    m_dummyRow4.push_back(std::shared_ptr<Cell>(new Cell(xPosition, 3)));
-  }
+  void addCell();
 
   /** "Empties" all cells by resetting their energy deposition.
    *
    *  This function is used as well in the GeometryCreator.
    */
-  void cleanUp() {
-    for (auto & cellPtr : m_cells) {
-      cellPtr->resetEDeposition();
-    }
+  void cleanUp();
 
-    for (auto & cellPtr : m_dummyRow2) {
-      cellPtr->resetEDeposition();
-    }
-
-    for (auto & cellPtr : m_dummyRow3) {
-      cellPtr->resetEDeposition();
-    }
-
-    for (auto & cellPtr : m_dummyRow4) {
-      cellPtr->resetEDeposition();
-    }
-  }
-
-  std::shared_ptr<Cell> getCellAt(unsigned xPosition, unsigned yPosition) const {
-    if (xPosition < m_cells.size()) {
-      if (yPosition == 0) {
-        return m_cells[xPosition];
-      } else if (yPosition == 1) {
-        return m_dummyRow2[xPosition];
-      } else if (yPosition == 2) {
-        return m_dummyRow3[xPosition];
-      } else if (yPosition == 3) {
-        return m_dummyRow4[xPosition];
-      } else {
-        return nullptr;
-      }
-    } else {
-      return nullptr;
-    }
-  }
+  std::shared_ptr<Cell> getCellAt(unsigned xPosition, unsigned yPosition) const;
 
   unsigned getMaxX() const {
-    return (m_cells.size());
+    return (m_cells[0].size());
   }
 
   unsigned getMaxY() const {
-    return 4;
+    return m_cells.size();
   }
 
 private:
-  std::vector< std::shared_ptr<Cell> > m_cells;
-  std::vector< std::shared_ptr<Cell> > m_dummyRow2;
-  std::vector< std::shared_ptr<Cell> > m_dummyRow3;
-  std::vector< std::shared_ptr<Cell> > m_dummyRow4;
-
+  std::vector< std::vector<std::shared_ptr<Cell> > > m_cells;
 };
