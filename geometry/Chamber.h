@@ -1,8 +1,7 @@
 #pragma once
 
 #include <geometry/Cell.h>
-
-class ChamberIterator;
+#include <geometry/ChamberIterator.h>
 
 #include <vector>
 #include <memory>

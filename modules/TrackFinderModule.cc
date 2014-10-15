@@ -1,7 +1,6 @@
 #include <modules/TrackFinderModule.h>
 
 #include <geometry/Chamber.h>
-#include <geometry/ChamberIterator.h>
 
 #include <core/DataStore.h>
 

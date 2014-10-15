@@ -1,6 +1,7 @@
 #pragma once
 
-#include <geometry/Chamber.h>
+//#include <geometry/Chamber.h>
+class Chamber;
 #include <geometry/Cell.h>
 
 #include <memory>

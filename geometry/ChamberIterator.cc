@@ -1,5 +1,7 @@
 #include <geometry/ChamberIterator.h>
 
+#include <geometry/Chamber.h>
+
 #include <iostream>
 
 using namespace std;
