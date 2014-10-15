@@ -1,0 +1,23 @@
+This project is set up with the g++ compiler
+of version 4.7 or higher.
+
+On Ubuntu you can do the following to get such
+a compiler:
+
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get upgrade g++
+
+Further you need the google test suite,
+which you can get with the following command:
+
+wget https://googletest.googlecode.com/files/gtest-1.7.0.zip
+
+To extract the files, you can use the command 'unzip'
+The build system uses scons, which you can add on Ubuntu via:
+
+sudo apt-get install scons
+
+You need to modify some files in gtest, that this works with the
+SConstruct provided by this project. Please read for
+further instructions the SConstruct.

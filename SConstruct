@@ -2,6 +2,9 @@
 
 """
 To make this SConscript work, I have removed all 'src' in includes in the 'src' folder.
+Note, that just unzipping gtest will leave you with the files in read-only mode. To change
+this, do the following in the source folder of gtest:
+chmod +w *
 As well I rename or link the gtest-Blah folder to just gtest.
 """
 
