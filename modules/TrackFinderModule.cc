@@ -21,11 +21,8 @@ void TrackFinderModule::event()
 
   //Define the Hough plane:
   unsigned dimension = 30;
-  vector<vector<unsigned> > houghSpace(dimension, vector<unsigned>(dimension , 0));
 
-  voteHough(chamber, houghSpace);
-
-  auto myTuple = findMaximum(houghSpace, chamber);
+  auto myTuple = findMaximum(voteHough(chamber, dimension), chamber);
   cout << "Best Track Candidate at: "  << endl
        << "value: "  << get<0>(myTuple) << endl
        << "X = "     << get<1>(myTuple) << endl
@@ -33,9 +30,10 @@ void TrackFinderModule::event()
 }
 
 
-void TrackFinderModule::voteHough(const Chamber& chamber,
-                                  vector<vector<unsigned> >& houghSpace)
+vector<vector<unsigned> > TrackFinderModule::voteHough(const Chamber& chamber,
+                                                       unsigned houghDimension)
 {
+  vector<vector<unsigned> > houghSpace(houghDimension, vector<unsigned>(houghDimension , 0));
   for (auto chamberIterator = chamber.first();
        chamberIterator.current() != nullptr; ++chamberIterator) {
     auto cellPtr = chamberIterator.current();
@@ -60,6 +58,7 @@ void TrackFinderModule::voteHough(const Chamber& chamber,
       houghSpace[xShare][static_cast<unsigned>((angle / M_PI) * houghSpace.size())]++;
     }
   }
+  return houghSpace;
 }
 
 tuple<unsigned, float, float>

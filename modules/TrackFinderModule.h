@@ -16,8 +16,8 @@ public:
   void event() override;
 
 private:
-  void voteHough(const Chamber& chamber,
-                 std::vector<std::vector<unsigned> >& houghSpace);
+  std::vector<std::vector<unsigned> > voteHough(const Chamber& chamber,
+                                      unsigned houghDimension);
 
   std::tuple<unsigned, float, float>
   findMaximum(const std::vector<std::vector<unsigned> >& houghSpace,
