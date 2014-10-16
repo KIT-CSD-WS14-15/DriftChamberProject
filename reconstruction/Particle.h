@@ -12,8 +12,8 @@ public:
    *  The momentum is normalized, to get a defined step length afterwards.
    */
   Particle(float pX, float pY, float x) : m_x(x), m_y(0.),
-  m_pX (pX / sqrtf(pX * pX + pY * pY)),
-  m_pY (pY / sqrtf(pX * pX + pY * pY))
+    m_pX(pX / sqrtf(pX * pX + pY* pY)),
+    m_pY(pY / sqrtf(pX * pX + pY* pY))
   {}
 
   /** Getter for current x position of the particle. */

@@ -17,7 +17,7 @@ public:
 
 private:
   std::vector<std::vector<unsigned> > voteHough(const Chamber& chamber,
-                                      unsigned houghDimension);
+                                                unsigned houghDimension);
 
   std::tuple<unsigned, float, float>
   findMaximum(const std::vector<std::vector<unsigned> >& houghSpace,

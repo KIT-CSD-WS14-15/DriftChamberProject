@@ -4,7 +4,7 @@
 using namespace std;
 
 Chamber::Chamber(unsigned nLayers) :
-    m_cells(vector<vector<shared_ptr<Cell> > > (nLayers))
+  m_cells(vector<vector<shared_ptr<Cell> > > (nLayers))
 {
 }
 
@@ -14,10 +14,11 @@ ChamberIterator Chamber::first() const
 }
 
 void Chamber::visualize() const
-{ //Print last layer first...
-  for (auto layer = m_cells.rbegin(); layer != m_cells.rend(); ++layer){
+{
+  //Print last layer first...
+  for (auto layer = m_cells.rbegin(); layer != m_cells.rend(); ++layer) {
     //Each layer can be printed in standard order.
-    for (auto& cell : *layer){
+    for (auto & cell : *layer) {
       cout << cell->visualize();
     }
     cout << endl;
@@ -27,7 +28,7 @@ void Chamber::visualize() const
 void Chamber::addCell()
 {
   //For all layers...
-  for (unsigned ii = 0; ii < m_cells.size(); ++ii){
+  for (unsigned ii = 0; ii < m_cells.size(); ++ii) {
     // ... place at the next available x position.
     unsigned xPosition = m_cells[0].size();
     m_cells[ii].emplace_back(new Cell(xPosition, ii));
@@ -36,7 +37,7 @@ void Chamber::addCell()
 
 void Chamber::cleanUp()
 {
-  for (ChamberIterator iter = first(); iter.current() != nullptr; ++iter){
+  for (ChamberIterator iter = first(); iter.current() != nullptr; ++iter) {
     iter.current()->resetEDeposition();
   }
 }

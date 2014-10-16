@@ -28,8 +28,8 @@ TEST(ChamberTest, continuousIteration)
   Chamber chamber(10);
   chamber.addCell();
   ChamberIterator chamberIterator = chamber.first();
-  for (unsigned ii = 0; ii < chamber.getMaxY(); ++ii){
-    EXPECT_EQ(ii+0.5, chamberIterator.current()->getYPosition());
+  for (unsigned ii = 0; ii < chamber.getMaxY(); ++ii) {
+    EXPECT_EQ(ii + 0.5, chamberIterator.current()->getYPosition());
     ++chamberIterator;
   }
   EXPECT_EQ(nullptr, chamberIterator.current());
@@ -39,17 +39,18 @@ TEST(ChamberTest, continuousIteration)
   chamber1.addCell();
   chamber1.addCell();
   ChamberIterator chamberIterator1 = chamber1.first();
-  EXPECT_EQ(chamber1.getCellAt(0,0), chamberIterator1.current());
+  EXPECT_EQ(chamber1.getCellAt(0, 0), chamberIterator1.current());
   ++chamberIterator1; ++chamberIterator1;
-  EXPECT_EQ(chamber1.getCellAt(2,0), chamberIterator1.current());
+  EXPECT_EQ(chamber1.getCellAt(2, 0), chamberIterator1.current());
   ++chamberIterator1; ++chamberIterator1;
-  EXPECT_EQ(chamber1.getCellAt(1,1), chamberIterator1.current());
+  EXPECT_EQ(chamber1.getCellAt(1, 1), chamberIterator1.current());
 }
 
-unsigned countHits(const Chamber& chamber){
+unsigned countHits(const Chamber& chamber)
+{
   unsigned counter = 0;
-  for (ChamberIterator iter = chamber.first(); iter.current() != nullptr; ++iter){
-    if (iter.current()->getEDeposition() > 0){
+  for (ChamberIterator iter = chamber.first(); iter.current() != nullptr; ++iter) {
+    if (iter.current()->getEDeposition() > 0) {
       counter++;
     }
   }

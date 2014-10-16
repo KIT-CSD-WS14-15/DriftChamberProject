@@ -34,7 +34,7 @@ TEST(CellTest, positionalHandling)
 
 TEST(CellTest, visualization)
 {
-  Cell cell(0,0);
+  Cell cell(0, 0);
   EXPECT_EQ("\x1B[97;40;1mO\x1B[0m", cell.visualize());
 
   cell.addEDeposition(1);
