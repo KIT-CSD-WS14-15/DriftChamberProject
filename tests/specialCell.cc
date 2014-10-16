@@ -20,4 +20,11 @@ TEST(SpecialCellTest, specialVisualization)
   SpecialCell specialCell1 (0,0, colourStrategyRedPtr);
   EXPECT_EQ("\x1B[97;41;1mO\x1B[0m", specialCell1.visualize());
   cout << "Red Cell:  " << specialCell1.visualize() << endl;
+  
+  shared_ptr<WidthStrategy> widthStrategyTwoPtr  (new WidthStrategyTwo() );
+  SpecialCell specialCell2 (0,0, colourStrategyBluePtr, widthStrategyTwoPtr);
+  EXPECT_EQ("\x1B[97;44;1moo\x1B[0m", specialCell2.visualize());
+  
+  specialCell2.addEDeposition(1);
+  EXPECT_EQ("\x1B[97;44;1m><\x1B[0m", specialCell2.visualize());
 }
