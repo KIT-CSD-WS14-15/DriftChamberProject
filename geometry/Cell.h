@@ -39,7 +39,7 @@ public:
    *  In this case a black background with an O for an empty cell
    *  and an X for a hit cell is printed.
    */
-  std::string visualize() {
+  virtual std::string visualize() {
     //see
     //https://gist.github.com/ian128K/39a490e5aa8d3bb77a8b
     //for color coding.
@@ -51,7 +51,7 @@ public:
   }
 
 
-private:
+protected:
   unsigned m_xPosition;
   unsigned m_yPosition;
 
