@@ -8,13 +8,17 @@
 
 class SpecialCell : public Cell {
 public:
+  /** Constructor with position and strategies.
+   *
+   *  Note that in the current version
+   */
   SpecialCell(unsigned xPosition, unsigned yPosition,
-              const std::shared_ptr<ColourStrategy> colourStrategy,
-              const std::shared_ptr<WidthStrategy>  widthStrategy =
-                std::shared_ptr <WidthStrategy> (new WidthStrategyOne())) :
+              std::shared_ptr<const ColourStrategy> colourStrategy,
+              std::shared_ptr<const WidthStrategy>  widthStrategy =
+                std::shared_ptr<WidthStrategy> (new WidthStrategyOne())) :
     Cell(xPosition, yPosition),
     m_colourStrategy(colourStrategy),
-    m_widthStrategy(widthStrategy)
+    m_widthStrategy( widthStrategy)
   {}
 
   std::string visualize() override {
@@ -27,6 +31,6 @@ public:
     return (returnString += "\x1B[0m");
   }
 protected:
-  std::shared_ptr<ColourStrategy> m_colourStrategy;
-  std::shared_ptr<WidthStrategy>  m_widthStrategy;
+  const std::shared_ptr<const ColourStrategy> m_colourStrategy;
+  const std::shared_ptr<const WidthStrategy>  m_widthStrategy;
 };

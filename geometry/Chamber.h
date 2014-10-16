@@ -1,6 +1,6 @@
 #pragma once
 
-#include <geometry/Cell.h>
+#include <geometry/SpecialCell.h>
 #include <geometry/ChamberIterator.h>
 
 #include <vector>

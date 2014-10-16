@@ -31,7 +31,14 @@ void Chamber::addCell()
   for (unsigned ii = 0; ii < m_cells.size(); ++ii) {
     // ... place at the next available x position.
     unsigned xPosition = m_cells[0].size();
-    m_cells[ii].emplace_back(new Cell(xPosition, ii));
+
+    if (ii <  (m_cells.size()/2)){
+      m_cells[ii].emplace_back(new SpecialCell(xPosition, ii,
+                               shared_ptr<ColourStrategy> (new ColourStrategyBlue())));
+    } else {
+      m_cells[ii].emplace_back(new SpecialCell(xPosition, ii,
+                               shared_ptr<ColourStrategy>(new ColourStrategyRed())));
+    }
   }
 }
 
