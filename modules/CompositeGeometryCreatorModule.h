@@ -9,7 +9,7 @@ class CompositeGeometryCreatorModule : public Module {
   void begin () override {
     std::cout << "Creating a composite geometry!" << std::endl;
     // Config info:
-    unsigned xSize = 100;
+    unsigned xSize = 10;
 
     std::vector<unsigned> nLayers = {8,6,6,6};
 
@@ -25,6 +25,6 @@ class CompositeGeometryCreatorModule : public Module {
     std::cout << compositeChamber.getMaxX() << std::endl;
     std::cout << compositeChamber.getMaxY() << std::endl;
 
-    compositeChamber.visualize();
+    compositeChamber.visualise();
   }
 };

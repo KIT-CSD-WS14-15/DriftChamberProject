@@ -5,10 +5,6 @@
 
 class CompositeChamber : public Chamber {
 public:
-  std::string visualize() override {
-    ChamberComponent::visualize();
-  }
-
   CompositeChamber(unsigned xSizeCounter = 0) : Chamber(-1),
     m_xSizeCoutnter(xSizeCounter)
   {}

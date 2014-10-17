@@ -33,11 +33,11 @@ public:
     return 1;
   }
 
-  std::string visualize (){
+  std::string visualise (){
     for (auto& childPtr : m_children){
-      std::cout << childPtr->visualize();
+      std::cout << childPtr->visualise();
     }
-    std::cout << std::endl;
+    std::cout << "End of Layer." << std::endl;
     return "";
   }
 

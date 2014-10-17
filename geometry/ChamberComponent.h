@@ -27,9 +27,9 @@ public:
     return sizeCounter;
   }
 
-  virtual std::string visualize() {
+  virtual std::string visualise() {
     for (auto& childPtr : m_children){
-      childPtr->visualize();
+      childPtr->visualise();
     }
   }
 
