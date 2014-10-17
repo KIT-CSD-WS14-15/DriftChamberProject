@@ -33,7 +33,7 @@ public:
     return 1;
   }
 
-  std::string visualize() override{
+  std::string visualize() override {
     //This provides a "Y-axis".
     std::cout <<  getMyY() << "\t | ";
     for (auto & childPtr : m_children) {

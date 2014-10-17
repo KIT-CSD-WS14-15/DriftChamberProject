@@ -1,24 +1,43 @@
 #pragma once
+#include <geometry/SpecialCell.h>
+#include <geometry/ChamberIterator.h>
+#include <geometry/ChamberComponent.h>
+
 #include <geometry/Chamber.h>
 #include <geometry/SuperLayer.h>
 #include <memory>
 
-class CompositeChamber : public Chamber {
+class CompositeChamber : public ChamberComponent {
 public:
-  CompositeChamber(unsigned xSizeCounter = 0) : Chamber(-1),
+  CompositeChamber(unsigned xSizeCounter = 0) :
     m_xSizeCounter(xSizeCounter)
   {}
 
+  ChamberIterator first() const {
+  return ChamberIterator(this);std::shared_ptr<Cell> Chamber::getCellAt(unsigned xPosition, unsigned yPosition) const
+      {
+        if (yPosition < m_cells.size() && xPosition < m_cells[0].size()) {
+          return m_cells[yPosition][xPosition];
+        }
+        return nullptr;
+      }
+  }
 
-  std::string visualize () override {
+  void cleanUp() {
+    for (ChamberIterator iter = first(); iter.current() != nullptr; ++iter) {
+      iter.current()->resetEDeposition();
+    }
+  }
+
+  std::string visualize() override {
     std::cout << std::endl;
-    for (unsigned ii = 0; ii < m_xSizeCounter; ii++){
+    for (unsigned ii = 0; ii < m_xSizeCounter; ii++) {
       std::cout << "-";
     }
     std::cout << std::endl;
     ChamberComponent::visualize();
     std::cout << std::endl;
-    for (unsigned ii = 0; ii < m_xSizeCounter; ii++){
+    for (unsigned ii = 0; ii < m_xSizeCounter; ii++) {
       std::cout << "-";
     }
     std::cout << std::endl;
@@ -46,6 +65,7 @@ public:
   bool isTopLevel() const override {
     return true;
   }
+  std::shared_ptr<Cell> getCellAt(unsigned xPosition, unsigned yPosition) const;
 
 private:
   unsigned m_xSizeCounter;
