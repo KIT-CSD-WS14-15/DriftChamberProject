@@ -15,6 +15,10 @@ public:
 
   ChamberComponent* getChild(unsigned iChild);
 
+  unsigned getNChild(){
+    return m_children.size();
+  }
+
   ChamberComponent* getParent() {
     return m_parent;
   }

@@ -13,6 +13,7 @@ public:
 
   void fillCells(ChamberComponent* chamberComponent) override {
     if (chamberComponent->isTopLevel()) {
+      std::cout << getMyY() << std::endl;
       for (int ii = m_children.size() * m_widthStrategy->getWidth(); ii < getMaxX(); ++ii) {
 
         m_children.emplace_back(new SpecialCell(ii * m_widthStrategy->getWidth(), getMyY(),

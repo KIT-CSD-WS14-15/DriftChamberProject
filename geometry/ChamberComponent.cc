@@ -14,12 +14,12 @@ unsigned ChamberComponent::getMyY() const
   if (m_parent) {
     sizeCounter += m_parent->getMyY();
 
-    for (int ii = 0; ii < getMaxX(); ++ii) {
+    for (int ii = 0; ii < m_parent->getNChild(); ++ii) {
       ChamberComponent* chamberComponent = m_parent->getChild(ii);
       if (chamberComponent == this) {
         break;
       }
-      sizeCounter += getMaxY();
+      sizeCounter += chamberComponent->getMaxY();
     }
   }
   return sizeCounter;

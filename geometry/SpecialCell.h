@@ -21,7 +21,7 @@ public:
     m_widthStrategy(widthStrategy)
   {}
 
-  virtual unsigned getMyY() const override {
+  unsigned getMaxY() const override {
     return 0;
   }
 
