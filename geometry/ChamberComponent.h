@@ -31,6 +31,7 @@ public:
     for (auto& childPtr : m_children){
       childPtr->visualise();
     }
+    return "";
   }
 
   virtual unsigned getMyY() const;
