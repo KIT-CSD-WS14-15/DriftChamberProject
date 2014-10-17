@@ -37,7 +37,7 @@ public:
     for (auto& childPtr : m_children){
       std::cout << childPtr->visualise();
     }
-    std::cout << "End of Layer." << std::endl;
+    std::cout <<  std::endl;
     return "";
   }
 
