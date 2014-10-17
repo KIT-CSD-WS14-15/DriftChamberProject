@@ -3,13 +3,13 @@
 #include <geometry/ChamberIterator.h>
 #include <geometry/ChamberComponent.h>
 
-#include <geometry/Chamber.h>
 #include <geometry/SuperLayer.h>
 #include <memory>
 
 class CompositeChamber : public ChamberComponent {
 public:
   CompositeChamber(unsigned xSizeCounter = 0) :
+    ChamberComponent(nullptr)
     m_xSizeCounter(xSizeCounter)
   {}
 

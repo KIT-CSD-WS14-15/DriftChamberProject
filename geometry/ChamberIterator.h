@@ -1,12 +1,10 @@
 #pragma once
 
-//#include <geometry/Chamber.h>
-class Chamber;
 #include <geometry/Cell.h>
 
 #include <memory>
 
-/** An Iterator for a  Chamber.
+/** An Iterator for a  CompositeChamber.
  *
  *  While the principle is similar, the actual implementation is a bit simplified
  *  compared with the "canonical" one described at:
@@ -17,8 +15,8 @@ class ChamberIterator {
 public:
 
   /** This constructor comes always to live at the beginning of the cell.*/
-  ChamberIterator(Chamber const*   const chamber) :
-    m_chamber(chamber), m_xPosition(0), m_yPosition(0)
+  ChamberIterator(Cell* cell) :
+    m_cell(cell)
   {}
 
   /** Prefix operator. */
@@ -32,8 +30,5 @@ public:
   std::shared_ptr<Cell> current();
 
 private:
-  unsigned m_xPosition;
-  unsigned m_yPosition;
-
-  Chamber const* const m_chamber;
+  Cell* m_cell;
 };

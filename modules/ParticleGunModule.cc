@@ -1,6 +1,6 @@
 #include <modules/ParticleGunModule.h>
 #include <core/DataStore.h>
-#include <geometry/Chamber.h>
+#include <geometry/CompositeChamber.h>
 #include <reconstruction/Particle.h>
 
 #include <memory>
@@ -12,7 +12,7 @@ using namespace std;
 
 void ParticleGunModule::event()
 {
-  shared_ptr<Chamber> myChamber = DataStore<Chamber>::Instance().getStorable("Chamber");
+  shared_ptr<CompositeChamber> myChamber = DataStore<CompositeChamber>::Instance().getStorable("Chamber");
 
   //do the Tracking
   //Create a random Track, that will be stepped through the Chamber

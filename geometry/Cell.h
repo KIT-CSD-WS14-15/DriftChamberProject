@@ -58,6 +58,9 @@ public:
     }
   }
 
+  Cell* getNextCell(){
+    return nullptr;
+  }
 
 protected:
   unsigned m_xPosition;

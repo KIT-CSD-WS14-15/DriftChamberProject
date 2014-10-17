@@ -19,6 +19,8 @@ public:
     return m_children.size();
   }
 
+  //ChamberComponent* getNext
+
   ChamberComponent* getParent() {
     return m_parent;
   }
