@@ -3,9 +3,12 @@
 
 using namespace std;
 
-Chamber::Chamber(unsigned nLayers) :
-  m_cells(vector<vector<shared_ptr<Cell> > > (nLayers))
+Chamber::Chamber(int nLayers) :
+  ChamberComponent(0)
 {
+  if (nLayers >= 0) {
+    m_cells = vector<vector<shared_ptr<Cell> > > (nLayers);
+  }
 }
 
 ChamberIterator Chamber::first() const
@@ -32,12 +35,12 @@ void Chamber::addCell()
     // ... place at the next available x position.
     unsigned xPosition = m_cells[0].size();
 
-    if (ii <  (m_cells.size()/2)){
+    if (ii < (m_cells.size() / 2)) {
       m_cells[ii].emplace_back(new SpecialCell(xPosition, ii,
-                               shared_ptr<ColourStrategy> (new ColourStrategyBlue())));
+                                               shared_ptr<ColourStrategy> (new ColourStrategyBlue())));
     } else {
       m_cells[ii].emplace_back(new SpecialCell(xPosition, ii,
-                               shared_ptr<ColourStrategy>(new ColourStrategyRed())));
+                                               shared_ptr<ColourStrategy>(new ColourStrategyRed())));
     }
   }
 }

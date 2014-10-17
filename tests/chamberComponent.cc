@@ -5,9 +5,6 @@
 
 TEST(ChamberComponentTest, childOps)
 {
-  ChamberComponent chamberComponent;
+  ChamberComponent chamberComponent(0);
   EXPECT_EQ(nullptr, chamberComponent.getChild(0));
-
-  chamberComponent.addChild(new ChamberComponent());
-  EXPECT_NE(nullptr, chamberComponent.getChild(0));
 }

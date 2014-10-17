@@ -18,8 +18,13 @@ public:
                 std::shared_ptr<WidthStrategy> (new WidthStrategyOne())) :
     Cell(xPosition, yPosition),
     m_colourStrategy(colourStrategy),
-    m_widthStrategy( widthStrategy)
+    m_widthStrategy(widthStrategy)
   {}
+
+  virtual unsigned getMyY() const override {
+    return 0;
+  }
+
 
   std::string visualize() override {
     std::string returnString = m_colourStrategy->getColourString();

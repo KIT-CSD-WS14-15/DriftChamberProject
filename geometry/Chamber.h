@@ -3,16 +3,20 @@
 #include <geometry/SpecialCell.h>
 #include <geometry/ChamberIterator.h>
 
+#include <geometry/ChamberComponent.h>
+
 #include <vector>
 #include <memory>
-#include <iostream>
 
 /** The geometric representation of the drift chamber.
  */
-class Chamber {
+class Chamber : public ChamberComponent {
 public:
+  /** Virtual destructor as this is now used as a base class.*/
+  virtual ~Chamber() {}
+
   /** Constructor for a Chamber with a number of lines given by parameter. */
-  Chamber(unsigned nLayers = 4);
+  Chamber(int nLayers = 4);
 
 
   /** Prints some visualization on the command line.
@@ -39,12 +43,15 @@ public:
 
   std::shared_ptr<Cell> getCellAt(unsigned xPosition, unsigned yPosition) const;
 
-  unsigned getMaxX() const {
+  virtual unsigned getMaxX() const override {
     return (m_cells[0].size());
   }
 
   unsigned getMaxY() const {
-    return m_cells.size();
+    if (m_cells.size()) {
+      return m_cells.size();
+    }
+    return ChamberComponent::getMaxY();
   }
 
 private:

@@ -1,10 +1,18 @@
 #pragma once
+
+#include <geometry/ChamberComponent.h>
+
 #include <string>
 
-class Cell {
+
+class Cell : public ChamberComponent {
 public:
+  /** Virtual destructor, as this is now a base class. */
+  virtual ~Cell() {};
+
   /** Constructs an empty drift cell with given position as lower left corner. */
-  Cell(unsigned xPosition, unsigned yPosition) :
+  Cell(unsigned xPosition, unsigned yPosition, ChamberComponent* parent = nullptr) :
+    ChamberComponent(parent),
     m_xPosition(xPosition), m_yPosition(yPosition),
     m_eDepositionCount(0)
   {}
