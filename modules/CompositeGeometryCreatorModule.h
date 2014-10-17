@@ -28,6 +28,6 @@ class CompositeGeometryCreatorModule : public Module {
 
     compositeChamber.visualize();
 
-    DataStore<Chamber>::Instance().store("Chamber", std::shared_ptr<Chamber>(&compositeChamber));
+    DataStore<CompositeChamber>::Instance().store("Chamber", std::shared_ptr<CompositeChamber>(&compositeChamber));
   }
 };

@@ -9,11 +9,12 @@
 class CompositeChamber : public ChamberComponent {
 public:
   CompositeChamber(unsigned xSizeCounter = 0) :
-    ChamberComponent(nullptr)
+    ChamberComponent(nullptr),
     m_xSizeCounter(xSizeCounter)
   {}
 
   ChamberIterator first() const {
+  /*
   return ChamberIterator(this);std::shared_ptr<Cell> Chamber::getCellAt(unsigned xPosition, unsigned yPosition) const
       {
         if (yPosition < m_cells.size() && xPosition < m_cells[0].size()) {
@@ -21,6 +22,7 @@ public:
         }
         return nullptr;
       }
+      */
   }
 
   void cleanUp() {

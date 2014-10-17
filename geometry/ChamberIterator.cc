@@ -6,7 +6,7 @@ using namespace std;
 
 ChamberIterator& ChamberIterator::operator ++()
 {
-  m_cell->getNext();
+  m_cell->getNextCell();
   return *this;
 }
 
