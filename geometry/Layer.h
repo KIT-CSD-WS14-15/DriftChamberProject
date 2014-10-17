@@ -13,7 +13,6 @@ public:
 
   void fillCells(ChamberComponent* chamberComponent) override {
     if (chamberComponent->isTopLevel()) {
-      std::cout << getMyY() << std::endl;
       for (int ii = m_children.size() * m_widthStrategy->getWidth(); ii < getMaxX(); ++ii) {
 
         m_children.emplace_back(new SpecialCell(ii * m_widthStrategy->getWidth(), getMyY(),
@@ -34,11 +33,13 @@ public:
     return 1;
   }
 
-  std::string visualise (){
-    for (auto& childPtr : m_children){
-      std::cout << childPtr->visualise();
+  std::string visualize() override{
+    //This provides a "Y-axis".
+    std::cout <<  getMyY() << "\t | ";
+    for (auto & childPtr : m_children) {
+      std::cout << childPtr->visualize();
     }
-    std::cout <<  std::endl;
+    std::cout << std::endl;
     return "";
   }
 

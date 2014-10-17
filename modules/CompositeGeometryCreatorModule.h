@@ -2,6 +2,7 @@
 #include <core/Module.h>
 #include <iostream>
 #include <geometry/CompositeChamber.h>
+#include <core/DataStore.h>
 #include <vector>
 #include <memory>
 
@@ -9,7 +10,7 @@ class CompositeGeometryCreatorModule : public Module {
   void begin () override {
     std::cout << "Creating a composite geometry!" << std::endl;
     // Config info:
-    unsigned xSize = 10;
+    unsigned xSize = 100;
 
     std::vector<unsigned> nLayers = {8,6,6,6};
 
@@ -25,6 +26,8 @@ class CompositeGeometryCreatorModule : public Module {
     std::cout << compositeChamber.getMaxX() << std::endl;
     std::cout << compositeChamber.getMaxY() << std::endl;
 
-    compositeChamber.visualise();
+    compositeChamber.visualize();
+
+    DataStore<Chamber>::Instance().store("Chamber", std::shared_ptr<Chamber>(&compositeChamber));
   }
 };

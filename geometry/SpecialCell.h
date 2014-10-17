@@ -25,10 +25,6 @@ public:
     return 0;
   }
 
-  std::string visualise() override {
-    return visualize();
-  }
-
   std::string visualize() override {
     std::string returnString = m_colourStrategy->getColourString();
     if (m_eDepositionCount == 0) {

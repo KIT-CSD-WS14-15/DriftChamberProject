@@ -15,7 +15,7 @@ public:
 
   ChamberComponent* getChild(unsigned iChild);
 
-  unsigned getNChild(){
+  unsigned getNChild() {
     return m_children.size();
   }
 
@@ -31,9 +31,9 @@ public:
     return sizeCounter;
   }
 
-  virtual std::string visualise() {
-    for (auto& childPtr : m_children){
-      childPtr->visualise();
+  virtual std::string visualize() {
+    for (auto & childPtr : m_children) {
+      childPtr->visualize();
     }
     return "";
   }

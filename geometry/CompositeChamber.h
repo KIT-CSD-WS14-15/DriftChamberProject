@@ -6,8 +6,24 @@
 class CompositeChamber : public Chamber {
 public:
   CompositeChamber(unsigned xSizeCounter = 0) : Chamber(-1),
-    m_xSizeCoutnter(xSizeCounter)
+    m_xSizeCounter(xSizeCounter)
   {}
+
+
+  std::string visualize () override {
+    std::cout << std::endl;
+    for (unsigned ii = 0; ii < m_xSizeCounter; ii++){
+      std::cout << "-";
+    }
+    std::cout << std::endl;
+    ChamberComponent::visualize();
+    std::cout << std::endl;
+    for (unsigned ii = 0; ii < m_xSizeCounter; ii++){
+      std::cout << "-";
+    }
+    std::cout << std::endl;
+    return "";
+  }
 
   std::shared_ptr<SuperLayer> addSuperLayer() {
     m_children.emplace_back(new SuperLayer(this));
@@ -19,18 +35,18 @@ public:
   }
 
   void addXSize(unsigned xSize) {
-    m_xSizeCoutnter++;
+    m_xSizeCounter++;
     fillCells();
   }
 
   unsigned getMaxX() const override {
-      return m_xSizeCoutnter;
-    }
+    return m_xSizeCounter;
+  }
 
   bool isTopLevel() const override {
     return true;
   }
 
 private:
-  unsigned m_xSizeCoutnter;
+  unsigned m_xSizeCounter;
 };

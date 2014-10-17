@@ -31,7 +31,7 @@ int main()
   //-----------------------------------------------------------------------------------
   //The following code decides, which modules actually will be executed.
   moduleList.emplace_back(new CompositeGeometryCreatorModule());
-  moduleList.emplace_back(new GeometryCreatorModule());
+//  moduleList.emplace_back(new GeometryCreatorModule());
   moduleList.emplace_back(new ParticleGunModule());
   moduleList.emplace_back(new TrackFinderModule());
   moduleList.emplace_back(new NewEventPrinterModule());
