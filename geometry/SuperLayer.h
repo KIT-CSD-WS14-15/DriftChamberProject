@@ -1,14 +1,16 @@
 #pragma once
 #include <geometry/ChamberComponent.h>
 #include <geometry/Layer.h>
+#include <memory>
 
 class SuperLayer : public ChamberComponent {
 public:
   SuperLayer(ChamberComponent* parent) : ChamberComponent(parent) {
   }
 
-  void addLayer(Layer* Layer) {
-    m_children.emplace_back(Layer);
+  std::shared_ptr<Layer>  addLayer() {
+    m_children.emplace_back(new Layer(this));
+    return std::static_pointer_cast<Layer> (m_children.back());
   }
 
 protected:

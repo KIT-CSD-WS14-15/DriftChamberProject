@@ -5,17 +5,17 @@
 
 #include "gtest/gtest.h"
 
+using namespace std;
+
 TEST(CompositeChamberTest, chamberConstruction)
 {
   CompositeChamber compositeChamber;
   EXPECT_EQ(0, compositeChamber.getMaxY());
 
-  SuperLayer*  superLayer = new SuperLayer(&compositeChamber);
-  compositeChamber.addSuperLayer(superLayer);
+  shared_ptr<SuperLayer> superLayer = compositeChamber.addSuperLayer();;
   EXPECT_EQ(0, compositeChamber.getMaxY());
 
-  Layer* layer = new Layer(superLayer);
-  superLayer->addLayer(layer);
+  shared_ptr<Layer> layer = superLayer->addLayer();
   EXPECT_EQ(0, compositeChamber.getMaxY());
 
   compositeChamber.addXSize(10);

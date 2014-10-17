@@ -1,3 +1,4 @@
+#include <modules/CompositeGeometryCreatorModule.h>
 #include <modules/GeometryCreatorModule.h>
 #include <modules/ParticleGunModule.h>
 #include <modules/TrackFinderModule.h>
@@ -29,6 +30,7 @@ int main()
   // Configuration Code
   //-----------------------------------------------------------------------------------
   //The following code decides, which modules actually will be executed.
+  moduleList.emplace_back(new CompositeGeometryCreatorModule());
   moduleList.emplace_back(new GeometryCreatorModule());
   moduleList.emplace_back(new ParticleGunModule());
   moduleList.emplace_back(new TrackFinderModule());

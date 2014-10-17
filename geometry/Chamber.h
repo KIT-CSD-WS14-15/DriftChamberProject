@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <memory>
+#include <iostream>
 
 /** The geometric representation of the drift chamber.
  */

@@ -27,6 +27,12 @@ public:
     return sizeCounter;
   }
 
+  virtual std::string visualize() {
+    for (auto& childPtr : m_children){
+      childPtr->visualize();
+    }
+  }
+
   virtual unsigned getMyY() const;
 
   virtual unsigned getMaxX() const {

@@ -1,15 +1,21 @@
 #pragma once
 #include <geometry/Chamber.h>
 #include <geometry/SuperLayer.h>
+#include <memory>
 
 class CompositeChamber : public Chamber {
 public:
-  CompositeChamber() : Chamber(-1),
-    m_xSizeCoutnter(0)
+  std::string visualize() override {
+    ChamberComponent::visualize();
+  }
+
+  CompositeChamber(unsigned xSizeCounter = 0) : Chamber(-1),
+    m_xSizeCoutnter(xSizeCounter)
   {}
 
-  void addSuperLayer(SuperLayer* superLayer) {
-    m_children.emplace_back(superLayer);
+  std::shared_ptr<SuperLayer> addSuperLayer() {
+    m_children.emplace_back(new SuperLayer(this));
+    return std::static_pointer_cast<SuperLayer> (m_children.back());
   }
 
   void fillCells() {

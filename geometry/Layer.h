@@ -2,7 +2,6 @@
 #include <geometry/ChamberComponent.h>
 #include <geometry/SpecialCell.h>
 #include <memory>
-
 #include <iostream>
 
 class Layer : public ChamberComponent {
@@ -32,6 +31,14 @@ public:
       return 0;
     }
     return 1;
+  }
+
+  std::string visualize (){
+    for (auto& childPtr : m_children){
+      std::cout << childPtr->visualize();
+    }
+    std::cout << std::endl;
+    return "";
   }
 
 private:
