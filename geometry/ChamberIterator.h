@@ -27,7 +27,7 @@ public:
    *  If we are done with the transversal through the whole chamber,
    *  we get back a nullptr.
    */
-  std::shared_ptr<Cell> current();
+  Cell* current();
 
 private:
   Cell* m_cell;

@@ -11,15 +11,13 @@ public:
     m_colourStrategy(new ColourStrategyBlue()) {
   }
 
-  void fillCells(ChamberComponent* chamberComponent) override {
-    if (chamberComponent->isTopLevel()) {
-      for (int ii = m_children.size() * m_widthStrategy->getWidth(); ii < getMaxX(); ++ii) {
+  void fillCells() override {
+    for (int ii = m_children.size() * m_widthStrategy->getWidth(); ii < getMaxX(); ++ii) {
 
-        m_children.emplace_back(new SpecialCell(ii * m_widthStrategy->getWidth(), getMyY(),
-                                                m_colourStrategy, m_widthStrategy));
-      }
+      m_children.emplace_back(new SpecialCell(ii * m_widthStrategy->getWidth(), getMyY(), this,
+                                              m_colourStrategy, m_widthStrategy));
+
     }
-    ChamberComponent::fillCells(chamberComponent);
   }
 
   /** Cells are actually building up the Chamber.
@@ -44,6 +42,6 @@ public:
   }
 
 private:
-  std::shared_ptr<const WidthStrategy>   m_widthStrategy;
-  std::shared_ptr<const ColourStrategy>  m_colourStrategy;
+  const WidthStrategy*   m_widthStrategy;
+  const ColourStrategy*  m_colourStrategy;
 };

@@ -17,7 +17,7 @@ using namespace std;
 void TrackFinderModule::event()
 {
   //get the geometry;
-  const CompositeChamber& chamber = *(DataStore<CompositeChamber>::Instance().getStorable("Chamber").get());
+  CompositeChamber& chamber = *(DataStore<CompositeChamber>::Instance().getStorable("Chamber").get());
 
   //Define the Hough plane:
   unsigned dimension = 30;
@@ -30,7 +30,7 @@ void TrackFinderModule::event()
 }
 
 
-vector<vector<unsigned> > TrackFinderModule::voteHough(const CompositeChamber& chamber,
+vector<vector<unsigned> > TrackFinderModule::voteHough(CompositeChamber& chamber,
                                                        unsigned houghDimension)
 {
   vector<vector<unsigned> > houghSpace(houghDimension, vector<unsigned>(houghDimension , 0));
@@ -63,7 +63,7 @@ vector<vector<unsigned> > TrackFinderModule::voteHough(const CompositeChamber& c
 
 tuple<unsigned, float, float>
 TrackFinderModule::findMaximum(const vector<vector<unsigned> >& houghSpace,
-                               const CompositeChamber& chamber)
+                               CompositeChamber& chamber)
 {
 //Find maximum
   unsigned maxXShare = 0;

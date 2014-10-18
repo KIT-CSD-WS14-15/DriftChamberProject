@@ -10,7 +10,14 @@ ChamberIterator& ChamberIterator::operator ++()
   return *this;
 }
 
-shared_ptr<Cell> ChamberIterator::current()
+Cell* ChamberIterator::current()
 {
-  return shared_ptr<Cell> (m_cell);
+  if (!m_cell) {
+    cout << "m_cell is a NullPtr;" << endl;
+  } else {
+    cout << "m_cell is NOT a NullPtr;" << endl;
+    cout << m_cell->getMaxX() << endl;
+    cout << "m_cell is NOT a NullPtr;" << endl;
+  }
+  return m_cell;
 }

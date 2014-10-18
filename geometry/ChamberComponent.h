@@ -1,8 +1,10 @@
 #pragma once
 
+class Cell;
+
 #include <vector>
-#include <memory>
 #include <iostream>
+
 
 class ChamberComponent {
 public:
@@ -19,10 +21,16 @@ public:
     return m_children.size();
   }
 
-  //ChamberComponent* getNext
 
   ChamberComponent* getParent() {
     return m_parent;
+  }
+
+  ChamberComponent* deepFirst()  {
+    if (m_children.empty()) {
+      return this;
+    }
+    return m_children[0]->deepFirst();
   }
 
   virtual unsigned getMaxY() const {
@@ -46,22 +54,17 @@ public:
     m_parent->getMaxX();
   }
 
-  virtual void fillCells(ChamberComponent* chamberComponent) {
-    if (chamberComponent->isTopLevel()) {
-      for (auto & childPtr : m_children) {
-        childPtr->fillCells(chamberComponent);
-      }
-    } else {
-      std::cout << "ERROR: addCell() shall only be called from Top Level." << std::endl;
+ Cell* getCellAt(unsigned xPosition, unsigned yPosition);
+
+  virtual void fillCells() {
+
+    for (auto & childPtr : m_children) {
+      childPtr->fillCells();
     }
   }
 
-  virtual bool isTopLevel() const {
-    return false;
-  }
-
 protected:
-  std::vector<std::shared_ptr<ChamberComponent> > m_children;
+  std::vector<ChamberComponent*> m_children;
   ChamberComponent* m_parent;
 
 };

@@ -1,12 +1,16 @@
 #include <geometry/CompositeChamber.h>
 
 
+/*
+Cell* CompositeChamber::getCellAt(unsigned xPosition, unsigned yPosition) const
+{
+  if(xPosition < getMaxX() && yPosition < getMaxY()){
+    //return m_cells[yPosition][xPosition];
+    for ()
 
-std::shared_ptr<Cell> CompositeChamber::getCellAt(unsigned xPosition, unsigned yPosition) const
-{/*
-  if (yPosition < m_cells.size() && xPosition < m_cells[0].size()) {
-    return m_cells[yPosition][xPosition];
   }
-  */
+
+  std::cout << "Bin in getCellAt()" << std::endl;
   return nullptr;
 }
+*/

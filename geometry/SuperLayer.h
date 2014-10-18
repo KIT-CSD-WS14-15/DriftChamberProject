@@ -8,8 +8,8 @@ public:
   SuperLayer(ChamberComponent* parent) : ChamberComponent(parent) {
   }
 
-  std::shared_ptr<Layer>  addLayer() {
+  Layer*  addLayer() {
     m_children.emplace_back(new Layer(this));
-    return std::dynamic_pointer_cast<Layer> (m_children.back());
+    return dynamic_cast<Layer*>(m_children.back());
   }
 };

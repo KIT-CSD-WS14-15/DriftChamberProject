@@ -12,12 +12,18 @@ using namespace std;
 
 void ParticleGunModule::event()
 {
+  cout << "Starting the Particle Gun Module and access DataStore" << endl;
   shared_ptr<CompositeChamber> myChamber = DataStore<CompositeChamber>::Instance().getStorable("Chamber");
+  if(myChamber == nullptr){
+    cout << "PROBLEM: Geometry not initialized." <<endl;
+  }
 
   //do the Tracking
   //Create a random Track, that will be stepped through the Chamber
   float pX = (rand() / static_cast<float>(RAND_MAX) - 0.5) * 2.;
   float pY =  rand() / static_cast<float>(RAND_MAX);
+
+  cout << "Making use of that stuff for the first time." << endl;
 
   //Lets limit the the x-position of the particle to the middle half.
   float chamberSizeX = static_cast<float>(myChamber->getMaxX());
@@ -30,7 +36,7 @@ void ParticleGunModule::event()
     int xPosition = static_cast<unsigned>(particle.getXPosition());
     int yPosition = static_cast<unsigned>(particle.getYPosition());
 
-    shared_ptr<Cell> myCellPtr = myChamber->getCellAt(xPosition, yPosition);
+    Cell* myCellPtr = myChamber->getCellAt(xPosition, yPosition);
     if (myCellPtr) {
       myCellPtr->addEDeposition(1);
     }

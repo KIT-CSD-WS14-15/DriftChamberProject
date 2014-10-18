@@ -16,10 +16,10 @@ public:
   void event() override;
 
 private:
-  std::vector<std::vector<unsigned> > voteHough(const CompositeChamber& chamber,
+  std::vector<std::vector<unsigned> > voteHough(CompositeChamber& chamber,
                                                 unsigned houghDimension);
 
   std::tuple<unsigned, float, float>
   findMaximum(const std::vector<std::vector<unsigned> >& houghSpace,
-              const CompositeChamber& chamber);
+              CompositeChamber& chamber);
 };

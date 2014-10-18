@@ -7,4 +7,5 @@ TEST(ChamberComponentTest, childOps)
 {
   ChamberComponent chamberComponent(0);
   EXPECT_EQ(nullptr, chamberComponent.getChild(0));
+  EXPECT_EQ(&chamberComponent, chamberComponent.deepFirst());
 }

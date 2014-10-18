@@ -14,9 +14,10 @@ class CompositeGeometryCreatorModule : public Module {
 
     std::vector<unsigned> nLayers = {8,6,6,6};
 
-    CompositeChamber compositeChamber(xSize);
+    std::shared_ptr<CompositeChamber> compositeChamberPtr (new CompositeChamber(xSize));
+    CompositeChamber& compositeChamber = *(compositeChamberPtr.get());
     for (int ii=0; ii < nLayers.size(); ii++){
-      std::shared_ptr<SuperLayer> superLayer = compositeChamber.addSuperLayer();
+      SuperLayer* superLayer = compositeChamber.addSuperLayer();
       for (int jj = 0; jj < nLayers[ii]; ++jj ){
         superLayer->addLayer();
       }
@@ -28,6 +29,6 @@ class CompositeGeometryCreatorModule : public Module {
 
     compositeChamber.visualize();
 
-    DataStore<CompositeChamber>::Instance().store("Chamber", std::shared_ptr<CompositeChamber>(&compositeChamber));
+    DataStore<CompositeChamber>::Instance().store("Chamber", std::shared_ptr<CompositeChamber>(compositeChamberPtr));
   }
 };

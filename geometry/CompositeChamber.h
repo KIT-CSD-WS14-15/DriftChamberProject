@@ -13,16 +13,9 @@ public:
     m_xSizeCounter(xSizeCounter)
   {}
 
-  ChamberIterator first() const {
-  /*
-  return ChamberIterator(this);std::shared_ptr<Cell> Chamber::getCellAt(unsigned xPosition, unsigned yPosition) const
-      {
-        if (yPosition < m_cells.size() && xPosition < m_cells[0].size()) {
-          return m_cells[yPosition][xPosition];
-        }
-        return nullptr;
-      }
-      */
+  ChamberIterator first() {
+    //get first Cell, which is going to be given to the ChamberIterator
+    return ChamberIterator(dynamic_cast<Cell*>(deepFirst()));
   }
 
   void cleanUp() {
@@ -46,13 +39,9 @@ public:
     return "";
   }
 
-  std::shared_ptr<SuperLayer> addSuperLayer() {
+  SuperLayer* addSuperLayer() {
     m_children.emplace_back(new SuperLayer(this));
-    return std::static_pointer_cast<SuperLayer> (m_children.back());
-  }
-
-  void fillCells() {
-    ChamberComponent::fillCells(this);
+    return (static_cast<SuperLayer*>(m_children.back()));
   }
 
   void addXSize(unsigned xSize) {
@@ -63,11 +52,6 @@ public:
   unsigned getMaxX() const override {
     return m_xSizeCounter;
   }
-
-  bool isTopLevel() const override {
-    return true;
-  }
-  std::shared_ptr<Cell> getCellAt(unsigned xPosition, unsigned yPosition) const;
 
 private:
   unsigned m_xSizeCounter;

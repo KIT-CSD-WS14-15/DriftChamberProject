@@ -11,7 +11,7 @@ public:
   virtual ~Cell() {};
 
   /** Constructs an empty drift cell with given position as lower left corner. */
-  Cell(unsigned xPosition, unsigned yPosition, ChamberComponent* parent = nullptr) :
+  Cell(unsigned xPosition, unsigned yPosition, ChamberComponent* parent) :
     ChamberComponent(parent),
     m_xPosition(xPosition), m_yPosition(yPosition),
     m_eDepositionCount(0)
@@ -58,7 +58,7 @@ public:
     }
   }
 
-  Cell* getNextCell(){
+  Cell* getNextCell() {
     return nullptr;
   }
 

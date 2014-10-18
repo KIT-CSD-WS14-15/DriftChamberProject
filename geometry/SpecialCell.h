@@ -13,10 +13,12 @@ public:
    *  Note that in the current version
    */
   SpecialCell(unsigned xPosition, unsigned yPosition,
-              std::shared_ptr<const ColourStrategy> colourStrategy,
-              std::shared_ptr<const WidthStrategy>  widthStrategy =
-                std::shared_ptr<WidthStrategy> (new WidthStrategyOne())) :
-    Cell(xPosition, yPosition),
+              ChamberComponent* parent,
+              const ColourStrategy* colourStrategy,
+              const WidthStrategy*  widthStrategy =
+                new WidthStrategyOne()
+             ) :
+    Cell(xPosition, yPosition, parent),
     m_colourStrategy(colourStrategy),
     m_widthStrategy(widthStrategy)
   {}
@@ -35,6 +37,6 @@ public:
     return (returnString += "\x1B[0m");
   }
 protected:
-  const std::shared_ptr<const ColourStrategy> m_colourStrategy;
-  const std::shared_ptr<const WidthStrategy>  m_widthStrategy;
+  const ColourStrategy* m_colourStrategy;
+  const WidthStrategy*  m_widthStrategy;
 };

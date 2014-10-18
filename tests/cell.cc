@@ -3,7 +3,7 @@
 
 TEST(CellTest, energyHandling)
 {
-  Cell cell(0, 0);
+  Cell cell(0, 0, nullptr);
   EXPECT_EQ(0, cell.getEDeposition());
 
   cell.addEDeposition(4);
@@ -19,22 +19,22 @@ TEST(CellTest, energyHandling)
 TEST(CellTest, positionalHandling)
 {
   // Constructor and position getter.
-  Cell cell(0, 0);
+  Cell cell(0, 0, nullptr);
   EXPECT_EQ(0.5, cell.getXPosition());
   EXPECT_EQ(0.5, cell.getYPosition());
 
-  Cell cell1(0, 1);
+  Cell cell1(0, 1, nullptr);
   EXPECT_EQ(0.5, cell1.getXPosition());
   EXPECT_EQ(1.5, cell1.getYPosition());
 
-  Cell cell2(1, 0);
+  Cell cell2(1, 0, nullptr);
   EXPECT_EQ(1.5, cell2.getXPosition());
   EXPECT_EQ(0.5, cell2.getYPosition());
 }
 
 TEST(CellTest, visualization)
 {
-  Cell cell(0, 0);
+  Cell cell(0, 0, nullptr);
   EXPECT_EQ("\x1B[97;40;1mO\x1B[0m", cell.visualize());
 
   cell.addEDeposition(1);
