@@ -7,18 +7,18 @@
 #include <memory>
 
 class CompositeGeometryCreatorModule : public Module {
-  void begin () override {
+  void begin() override {
     std::cout << "Creating a composite geometry!" << std::endl;
     // Config info:
     unsigned xSize = 100;
 
-    std::vector<unsigned> nLayers = {8,6,6,6};
+    std::vector<unsigned> nLayers = {8, 6, 6, 6};
 
-    std::shared_ptr<CompositeChamber> compositeChamberPtr (new CompositeChamber(xSize));
+    std::shared_ptr<CompositeChamber> compositeChamberPtr(new CompositeChamber(xSize));
     CompositeChamber& compositeChamber = *(compositeChamberPtr.get());
-    for (int ii=0; ii < nLayers.size(); ii++){
+    for (int ii = 0; ii < nLayers.size(); ii++) {
       SuperLayer* superLayer = compositeChamber.addSuperLayer();
-      for (int jj = 0; jj < nLayers[ii]; ++jj ){
+      for (int jj = 0; jj < nLayers[ii]; ++jj) {
         superLayer->addLayer();
       }
     }
@@ -30,5 +30,9 @@ class CompositeGeometryCreatorModule : public Module {
     compositeChamber.visualize();
 
     DataStore<CompositeChamber>::Instance().store("Chamber", std::shared_ptr<CompositeChamber>(compositeChamberPtr));
+  }
+
+  void event() override {
+    (DataStore<CompositeChamber>::Instance().getStorable("Chamber"))->cleanUp();
   }
 };

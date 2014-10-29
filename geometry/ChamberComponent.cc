@@ -1,5 +1,7 @@
 #include <geometry/ChamberComponent.h>
 #include <geometry/Cell.h>
+#include <iostream>
+
 
 using namespace std;
 ChamberComponent* ChamberComponent::getChild(unsigned iChild)
@@ -9,6 +11,28 @@ ChamberComponent* ChamberComponent::getChild(unsigned iChild)
   }
   return nullptr;
 }
+
+ChamberComponent* ChamberComponent::getNextChild(ChamberComponent* currentChild)
+{
+  for (auto childPtr = m_children.begin(); childPtr != m_children.end(); childPtr++) {
+    if (*childPtr == currentChild) {
+      childPtr++;
+      if (childPtr != m_children.end()) {
+        return *childPtr;
+      } else {
+        if (m_parent) {
+          ChamberComponent* neighbour = m_parent->getNextChild(this);
+          if (neighbour) {
+            return neighbour->getChild(0);
+          }
+        }
+      }
+      return nullptr;
+    }
+  }
+  return nullptr;
+}
+
 
 unsigned ChamberComponent::getMyY() const
 {
@@ -27,18 +51,27 @@ unsigned ChamberComponent::getMyY() const
   return sizeCounter;
 }
 
-Cell*  ChamberComponent::getCellAt(unsigned xPosition, unsigned yPosition) {
-  if(xPosition < getMaxX()){
-    std::cout << "I'm verbose" << xPosition << ", "<< yPosition << endl;
-    if (yPosition >= getMyY() && yPosition <= getMyY() + getMaxY()){
-      std::cout << "Hot candidate."  << endl;
+Cell*  ChamberComponent::getCellAt(unsigned xPosition, unsigned yPosition)
+{
+  if (xPosition < getMaxX()) {
+
+    if (yPosition >= getMyY() && yPosition <= getMyY() + getMaxY()) {
       //Y Position is in the compound.
-      if(m_children.empty()) {
+      if (m_children.empty()) {
         //try if we have a cell
-        return dynamic_cast<Cell*> (this);
+        Cell* cell = dynamic_cast<Cell*>(this);
+        if (cell != 0) {
+          if (cell->xIsInside(xPosition)) {
+            return cell;
+          }
+        }
+        return 0;
       }
-      for (auto& childPtr : m_children){
-        ChamberComponent* tmp = childPtr->getCellAt(xPosition, yPosition);
+      for (auto & childPtr : m_children) {
+        Cell* tmp = childPtr->getCellAt(xPosition, yPosition);
+        if (tmp) {
+          return tmp;
+        }
       }
     }
   }

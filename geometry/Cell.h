@@ -3,6 +3,7 @@
 #include <geometry/ChamberComponent.h>
 
 #include <string>
+#include <iostream>
 
 
 class Cell : public ChamberComponent {
@@ -20,6 +21,13 @@ public:
   /** Returns the central position of the cell. */
   float getXPosition() const {
     return m_xPosition + 0.5;
+  }
+
+  virtual bool xIsInside(unsigned x) {
+    if (x == m_xPosition) {
+      return true;
+    }
+    return false;
   }
 
   /** Returns the central position of the cell. */
@@ -59,7 +67,7 @@ public:
   }
 
   Cell* getNextCell() {
-    return nullptr;
+    return dynamic_cast<Cell*>(m_parent->getNextChild(this));
   }
 
 protected:

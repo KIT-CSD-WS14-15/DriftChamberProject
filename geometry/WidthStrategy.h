@@ -12,7 +12,7 @@ struct WidthStrategyOne : public WidthStrategy {
     return 1;
   }
   std::string getEmptyDisplayElement() const override {
-    return "O";
+    return "-";
   }
   std::string getHitDisplayElement() const override {
     return "X";
@@ -24,7 +24,7 @@ struct WidthStrategyTwo : public WidthStrategy {
     return 2;
   }
   std::string getEmptyDisplayElement() const override {
-    return "oo";
+    return "::";
   }
   std::string getHitDisplayElement() const override {
     return "><";
@@ -36,7 +36,7 @@ struct WidthStrategyThree : public WidthStrategy {
     return 3;
   }
   std::string getEmptyDisplayElement() const override {
-    return "|O|";
+    return "|-|";
   }
   std::string getHitDisplayElement() const override {
     return ">-<";

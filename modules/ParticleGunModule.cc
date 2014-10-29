@@ -14,8 +14,8 @@ void ParticleGunModule::event()
 {
   cout << "Starting the Particle Gun Module and access DataStore" << endl;
   shared_ptr<CompositeChamber> myChamber = DataStore<CompositeChamber>::Instance().getStorable("Chamber");
-  if(myChamber == nullptr){
-    cout << "PROBLEM: Geometry not initialized." <<endl;
+  if (myChamber == nullptr) {
+    cout << "PROBLEM: Geometry not initialized." << endl;
   }
 
   //do the Tracking

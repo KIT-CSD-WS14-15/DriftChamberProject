@@ -17,6 +17,8 @@ public:
 
   ChamberComponent* getChild(unsigned iChild);
 
+  ChamberComponent* getNextChild(ChamberComponent* currentChild);
+
   unsigned getNChild() {
     return m_children.size();
   }
@@ -42,8 +44,8 @@ public:
   }
 
   virtual std::string visualize() {
-    for (auto & childPtr : m_children) {
-      childPtr->visualize();
+    for (auto childPtr = m_children.rbegin(); childPtr != m_children.rend(); childPtr++) {
+      (*childPtr)->visualize();
     }
     return "";
   }
@@ -54,7 +56,7 @@ public:
     m_parent->getMaxX();
   }
 
- Cell* getCellAt(unsigned xPosition, unsigned yPosition);
+  Cell* getCellAt(unsigned xPosition, unsigned yPosition);
 
   virtual void fillCells() {
 
