@@ -24,7 +24,7 @@ struct WidthStrategyTwo : public WidthStrategy {
     return 2;
   }
   std::string getEmptyDisplayElement() const override {
-    return "::";
+    return "--";
   }
   std::string getHitDisplayElement() const override {
     return "><";

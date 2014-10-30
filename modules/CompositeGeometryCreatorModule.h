@@ -2,6 +2,8 @@
 #include <core/Module.h>
 #include <iostream>
 #include <geometry/CompositeChamber.h>
+#include <geometry/ColourStrategy.h>
+#include <geometry/WidthStrategy.h>
 #include <core/DataStore.h>
 #include <vector>
 #include <memory>
@@ -11,15 +13,24 @@ class CompositeGeometryCreatorModule : public Module {
     std::cout << "Creating a composite geometry!" << std::endl;
     // Config info:
     unsigned xSize = 100;
-
-    std::vector<unsigned> nLayers = {8, 6, 6, 6};
+    std::vector<unsigned> nLayers = {8, 6, 6, 6, 6};
 
     std::shared_ptr<CompositeChamber> compositeChamberPtr(new CompositeChamber(xSize));
     CompositeChamber& compositeChamber = *(compositeChamberPtr.get());
     for (int ii = 0; ii < nLayers.size(); ii++) {
-      SuperLayer* superLayer = compositeChamber.addSuperLayer();
+      SuperLayer* superLayer = 0;
+      if (ii % 2) {
+        superLayer = compositeChamber.addSuperLayer(new ColourStrategyBlue());
+      } else {
+        superLayer = compositeChamber.addSuperLayer(new ColourStrategyRed());
+      }
+
       for (int jj = 0; jj < nLayers[ii]; ++jj) {
-        superLayer->addLayer();
+        if (jj < nLayers[ii] / 2) {
+          superLayer->addLayer(new WidthStrategyOne());
+        } else {
+          superLayer->addLayer(new WidthStrategyTwo());
+        }
       }
     }
     compositeChamber.fillCells();

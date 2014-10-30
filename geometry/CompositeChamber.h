@@ -2,6 +2,7 @@
 #include <geometry/SpecialCell.h>
 #include <geometry/ChamberIterator.h>
 #include <geometry/ChamberComponent.h>
+#include <geometry/ColourStrategy.h>
 
 #include <geometry/SuperLayer.h>
 #include <memory>
@@ -39,8 +40,8 @@ public:
     return "";
   }
 
-  SuperLayer* addSuperLayer() {
-    m_children.emplace_back(new SuperLayer(this));
+  SuperLayer* addSuperLayer(const ColourStrategy* colourStrategy = new ColourStrategyBlue()) {
+    m_children.emplace_back(new SuperLayer(this, colourStrategy));
     return (static_cast<SuperLayer*>(m_children.back()));
   }
 

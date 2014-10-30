@@ -23,6 +23,13 @@ public:
     m_widthStrategy(widthStrategy)
   {}
 
+  bool xIsInside(unsigned x) override {
+    if (x >=  m_xPosition && x <= m_xPosition + m_widthStrategy->getWidth()) {
+      return true;
+    }
+    return false;
+  }
+
   unsigned getMaxY() const override {
     return 0;
   }

@@ -6,16 +6,17 @@
 
 class Layer : public ChamberComponent {
 public:
-  Layer(ChamberComponent* parent) : ChamberComponent(parent),
-    m_widthStrategy(new WidthStrategyOne()),
-    m_colourStrategy(new ColourStrategyBlue()) {
+  Layer(ChamberComponent* parent, const ColourStrategy* colourStrategy,
+        const WidthStrategy* widthStrategy = new WidthStrategyOne()) :
+    ChamberComponent(parent),
+    m_widthStrategy(widthStrategy),
+    m_colourStrategy(colourStrategy) {
   }
 
   void fillCells() override {
-    for (int ii = m_children.size() * m_widthStrategy->getWidth(); ii < getMaxX(); ++ii) {
-
-      m_children.emplace_back(new SpecialCell(ii * m_widthStrategy->getWidth(), getMyY(), this,
-                                              m_colourStrategy, m_widthStrategy));
+    unsigned width = m_widthStrategy->getWidth();
+    for (int ii = m_children.size() * m_widthStrategy->getWidth(); ii < getMaxX(); ii += width) {
+      m_children.emplace_back(new SpecialCell(ii, getMyY(), this, m_colourStrategy, m_widthStrategy));
 
     }
   }
@@ -42,6 +43,6 @@ public:
   }
 
 private:
-  const WidthStrategy*   m_widthStrategy;
-  const ColourStrategy*  m_colourStrategy;
+  const WidthStrategy*    m_widthStrategy;
+  const ColourStrategy*   m_colourStrategy;
 };
