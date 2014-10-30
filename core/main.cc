@@ -1,5 +1,6 @@
 #include <modules/CompositeGeometryCreatorModule.h>
 #include <modules/ParticleGunModule.h>
+#include <modules/BackgroundModule.h>
 #include <modules/TrackFinderModule.h>
 #include <modules/NewEventPrinterModule.h>
 
@@ -30,6 +31,7 @@ int main()
   //-----------------------------------------------------------------------------------
   //The following code decides, which modules actually will be executed.
   moduleList.emplace_back(new CompositeGeometryCreatorModule());
+  moduleList.emplace_back(new BackgroundModule());
   moduleList.emplace_back(new ParticleGunModule());
   moduleList.emplace_back(new TrackFinderModule());
   moduleList.emplace_back(new NewEventPrinterModule());

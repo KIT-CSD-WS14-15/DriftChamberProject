@@ -5,6 +5,8 @@
 #include <string>
 #include <iostream>
 
+class BackgroundVisitor;
+
 
 class Cell : public ChamberComponent {
 public:
@@ -29,6 +31,8 @@ public:
     }
     return false;
   }
+
+  virtual void accept(BackgroundVisitor& backgroundVisitor);
 
   /** Returns the central position of the cell. */
   float getYPosition() const {

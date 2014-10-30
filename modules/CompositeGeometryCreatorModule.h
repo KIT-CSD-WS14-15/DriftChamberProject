@@ -35,8 +35,8 @@ class CompositeGeometryCreatorModule : public Module {
     }
     compositeChamber.fillCells();
 
-    std::cout << compositeChamber.getMaxX() << std::endl;
-    std::cout << compositeChamber.getMaxY() << std::endl;
+    std::cout << "Maximum X of the Chamber: " << compositeChamber.getMaxX() << std::endl;
+    std::cout << "Maximum Y of the Chamber: " << compositeChamber.getMaxY() << std::endl;
 
     compositeChamber.visualize();
 
